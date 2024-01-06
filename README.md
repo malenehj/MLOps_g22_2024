@@ -9,7 +9,7 @@ Malene Hornstrup Jespersen (s237246) <br>
 Mathias Nissen (student id) <br>
 Riccardo Conti (student id) <br>
 
-## Project description
+## Project description: Emotion classification
 
 1. **Overall goal of the project:**
 The goal of this project is to perform multiclass classification to identify an expressed emotion based on a single sentence. The classifier can be used in different settings such as customer service, market research, or brand monitoring to analyze emotions expressed in messages, social media posts, or reviews with more nuance than a common positive/negative sentiment analyzer. 
