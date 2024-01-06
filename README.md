@@ -14,7 +14,7 @@ Riccardo Conti (student id) <br>
 1. **Overall goal of the project:**
 The goal of this project is to perform multiclass classification to identify an expressed emotion based on a single sentence. 
 
-2. **What framework are you going to use and you do you intend to include the framework into your project?**
+2. **What framework are you going to use and do you intend to include the framework into your project?**
 Since the task is natural language processing (NLP), we use the [Transformers](https://github.com/huggingface/transformers) framework from the Huggingface group, which contains pretrained state-of-the-art models for NLP tasks. 
 
 3. **What data are you going to run on (initially, may change)?**
