@@ -9,6 +9,7 @@ Malene Hornstrup Jespersen (s237246) <br>
 Mathias Nissen (student id) <br>
 Riccardo Conti (student id) <br>
 
+## Project description
 
 1. **Overall goal of the project:**
 The goal of this project is to perform multiclass classification to identify an expressed emotion based on a single sentence. 
