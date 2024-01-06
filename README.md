@@ -12,7 +12,7 @@ Riccardo Conti (student id) <br>
 ## Project description
 
 1. **Overall goal of the project:**
-The goal of this project is to perform multiclass classification to identify an expressed emotion based on a single sentence. 
+The goal of this project is to perform multiclass classification to identify an expressed emotion based on a single sentence. The classifier can be used in different settings such as customer service, market research, or brand monitoring to analyze emotions expressed in messages, social media posts, or reviews with more nuance than a common positive/negative sentiment analyzer. 
 
 2. **What framework are you going to use and do you intend to include the framework into your project?**
 Since the task is natural language processing (NLP), we use the [Transformers](https://github.com/huggingface/transformers) framework from the Huggingface group, which contains pretrained state-of-the-art models for NLP tasks. 
@@ -21,7 +21,7 @@ Since the task is natural language processing (NLP), we use the [Transformers](h
 The pretrained model is finetuned on the open source Kaggle dataset [Emotions dataset for NLP](https://www.kaggle.com/datasets/praveengovi/emotions-dataset-for-nlp/data). The complete dataset contains 20,000 observations, divided into training (16,000), testing (2,000) and validation (2,000) subsets. Each observation contains a single text sentence and a corresponding label indicating one of six expressed emotions: sadness, anger, fear, joy, love, or surprise. 
 
 4. **What models do you expect to use?**
-We expect to use the pre-trained model DistilBERT from the Transformers framework finetuned on the emotions data.
+We expect to use the pre-trained model [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) from the Transformers framework finetuned on the emotions data. DistilBERT was developed to be a smaller, faster, cheaper, and lighter version of BERT while retaining high performance across many different NLP tasks. 
 
 
 
