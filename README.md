@@ -6,7 +6,7 @@ This repository contains the project work carried out by group 22 for the MLOps 
 Eszter Hetzmann (s232532) <br>
 Jakub Solis (student id) <br>
 Malene Hornstrup Jespersen (s237246) <br>
-Mathias Nissen (student id) <br>
+Mathias Stokkebye Nissen (s173973) <br>
 Riccardo Conti (student id) <br>
 
 ## Project description: Emotion classification
