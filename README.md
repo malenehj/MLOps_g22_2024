@@ -1,6 +1,28 @@
 # mlops_g22_2024
 
-This report is for the MLOps DTU course, January 2024
+This repository contains the project work carried out by group 22 for the MLOps course at DTU, January 2024. 
+
+**Project authors:** <br>
+Eszter Hetzmann (student id) <br>
+Jakub Solis (student id) <br>
+Malene Hornstrup Jespersen (s237246) <br>
+Mathias Nissen (student id) <br>
+Riccardo Conti (student id) <br>
+
+
+1. **Overall goal of the project:**
+The goal of this project is to perform multiclass classification to identify an expressed emotion based on a single sentence. 
+
+2. **What framework are you going to use and you do you intend to include the framework into your project?**
+Since the task is natural language processing (NLP), we use the [Transformers](https://github.com/huggingface/transformers) framework from the Huggingface group, which contains pretrained state-of-the-art models for NLP tasks. 
+
+3. **What data are you going to run on (initially, may change)?**
+The pretrained model is finetuned on the open source Kaggle dataset [Emotions dataset for NLP](https://www.kaggle.com/datasets/praveengovi/emotions-dataset-for-nlp/data). The complete dataset contains 20,000 observations, divided into training (16,000), testing (2,000) and validation (2,000) subsets. Each observation contains a single text sentence and a corresponding label indicating one of six expressed emotions: sadness, anger, fear, joy, love, or surprise. 
+
+4. **What models do you expect to use?**
+We expect to use the pre-trained model DistilBERT from the Transformers framework finetuned on the emotions data.
+
+
 
 ## Project structure
 
