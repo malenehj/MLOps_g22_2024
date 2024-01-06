@@ -18,10 +18,10 @@ The goal of this project is to perform multiclass classification to identify an 
 Since the task is natural language processing (NLP), we use the [Transformers](https://github.com/huggingface/transformers) framework from the Huggingface group, which contains pretrained state-of-the-art models for NLP tasks. 
 
 3. **What data are you going to run on (initially, may change)?**
-The pretrained model is finetuned on the open source Kaggle dataset [Emotions dataset for NLP](https://www.kaggle.com/datasets/praveengovi/emotions-dataset-for-nlp/data). The complete dataset contains 20,000 observations, divided into training (16,000), testing (2,000) and validation (2,000) subsets. Each observation contains a single text sentence and a corresponding label indicating one of six expressed emotions: sadness, anger, fear, joy, love, or surprise. 
+The pretrained model is finetuned on the open source Kaggle dataset [Emotions dataset for NLP](https://www.kaggle.com/datasets/praveengovi/emotions-dataset-for-nlp/data). The complete dataset contains 20,000 observations, divided into training (16,000), testing (2,000) and validation (2,000) subsets. Each observation contains a single text sentence and a corresponding label indicating one of six expressed emotions: sadness, anger, fear, joy, love, or surprise. The dataset was chosen for its simplicity. Since the dataset contains pre-defined labels, implementation is feasible within the given timeframe.
 
 4. **What models do you expect to use?**
-We expect to use the pre-trained model [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) from the Transformers framework finetuned on the emotions data. DistilBERT was developed to be a smaller, faster, cheaper, and lighter version of BERT while retaining high performance across many different NLP tasks. 
+We expect to use the pre-trained model [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) from the Transformers framework finetuned on the emotions data. DistilBERT was developed to be a smaller, faster, cheaper, and lighter version of BERT while retaining high performance across many different NLP tasks. DistilBERT was chosen for its speed and simplicity.
 
 
 
