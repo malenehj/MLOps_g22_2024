@@ -7,7 +7,7 @@ Eszter Hetzmann (s232532) <br>
 Jakub Solis (student id) <br>
 Malene Hornstrup Jespersen (s237246) <br>
 Mathias Stokkebye Nissen (s173973) <br>
-Riccardo Conti (student id) <br>
+Riccardo Conti (s230085) <br>
 
 ## Project description: Emotion classification
 
