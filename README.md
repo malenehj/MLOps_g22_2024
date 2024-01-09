@@ -4,7 +4,7 @@ This repository contains the project work carried out by group 22 for the MLOps 
 
 **Project authors:** <br>
 Eszter Hetzmann (s232532) <br>
-Jakub Solis (student id) <br>
+Jakub Solis (s213792) <br>
 Malene Hornstrup Jespersen (s237246) <br>
 Mathias Stokkebye Nissen (s173973) <br>
 Riccardo Conti (s230085) <br>
