@@ -4,9 +4,14 @@ import pytest
 from torch.utils.data import DataLoader
 from mlops_g22_2024.data import make_dataset
 
-def test_basic_data_import():
+# base data-sets fixture, for use in tests below
+@pytest.fixture()
+def data_loaders():
     train_dataloader, val_dataloader, test_dataloader = make_dataset.md()
+    return train_dataloader, val_dataloader, test_dataloader
 
+
+def test_basic_data_import(train_dataloader, val_dataloader, test_dataloader):
     # Testing if the dataloaders are of type DataLoader:
     assert type(train_dataloader) == DataLoader
     assert type(val_dataloader) == DataLoader
