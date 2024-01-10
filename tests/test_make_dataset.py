@@ -1,7 +1,10 @@
 import os
 import pytest
 
-from ML_ops_project.mlops_g22_2024.data  import make_dataset
+os.system('ls')
 
-def basick_data_import():
-    data = make_dataset.md()
+from mlops_g22_2024.data import make_dataset
+
+def test_basic_data_import():
+    D = make_dataset.md()
+    print('this is a print')
