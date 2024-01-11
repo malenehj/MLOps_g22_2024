@@ -6,12 +6,16 @@ from data.make_dataset import md
 from models.model import model
 import wandb
 from transformers import DistilBertTokenizerFast
+import hydra
+
+# specify path of config file to later pass it to wandb 
+@hydra.main(config_path="../config", config_name="config.yaml") 
 
 
-#os.environ["WANDB_API_KEY"] = api_key
+
 wandb.init(project='dtu_mlops24',
            notes="Testing the WANDB",
-          # config = config, #specify config file to read the hyperparameters from 
+           config = config, #specify config file to read the hyperparameters from 
            )
 
 
@@ -43,17 +47,17 @@ def compute_metrics(eval_pred):
 # Defining the training arguments
 training_args = TrainingArguments(
     output_dir="./models",
-    learning_rate=2e-5,
-    per_device_train_batch_size=16,
-    per_device_eval_batch_size=16,
-    num_train_epochs=2,
-    weight_decay=0.01,
+    learning_rate=config.lr,
+    per_device_train_batch_size=config.train_batch_size,
+    per_device_eval_batch_size=config.eval_batch_size,
+    num_train_epochs=config.epochs,
+    weight_decay=config.weight_decay,
     evaluation_strategy="epoch",
     save_strategy="epoch",
     load_best_model_at_end=True,
     push_to_hub=False,
     report_to="wandb",
-    run_name="bertdistil",  # name of the W&B run 
+    #run_name="bertdistil",  # name of the W&B run 
     logging_steps=400,  # how often to log to W&B
 )
 
@@ -73,7 +77,7 @@ trainer.train()
 # --- SAVING THE MODEL --- #
 
 model_path = './models'
-trainer.save_model(model_path)
+trainer.save_pretrained(model_path)
 
 
 print('Model saved successfully at: ', model_path)
