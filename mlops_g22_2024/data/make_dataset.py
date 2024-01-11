@@ -28,7 +28,17 @@ def label_encoding(labels):
     return encoder.fit_transform(labels)
 
 # Method for saving the processed data
-def save_processed_data(dataset, filepath):
+def save_processed_data(dataset, file_name):
+
+    current_dir = os.path.dirname(__file__)  # gets the directory where the script is located
+    processed_data_path = os.path.join(current_dir, '..', '..', 'data/processed', file_name + '_processed_data.pt')
+
+    torch.save(dataset, processed_data_path)
+
+
+# old code: 
+# -----------------------------------------------
+    """
     # Extract and save tokenized data and labels
     encodings = [item[0] for item in dataset]
     labels = [item[1] for item in dataset]
@@ -43,6 +53,9 @@ def save_processed_data(dataset, filepath):
     processed_data_path = os.path.join(current_dir, '..', '..', 'data/processed', filepath + '_processed_data.pt')
 
     torch.save(processed_data, processed_data_path)
+    """
+# -----------------------------------------------
+
 
 # Dataset class for consistency
 class EmotionDataset(torch.utils.data.Dataset):
@@ -59,36 +72,31 @@ class EmotionDataset(torch.utils.data.Dataset):
         return len(self.labels)
 
 def check_processed_data_exists(filepath):
-    return os.path.exists(filepath + '_data.pt') and os.path.exists(filepath + '_labels.pt')
+    return os.path.exists(filepath + '_data.pt')
 
 def load_processed_data(filepath):
     # Load the saved tokenized texts and labels
-    tokenized_texts = torch.load(filepath + '_data.pt')
-    labels = torch.load(filepath + '_labels.pt')
-
-    # Tokenized texts are saved as a list of dictionary-like objects,
-    # we need to convert them to the proper tensor format for use in a TensorDataset.
-    input_ids = torch.stack([tt['input_ids'].squeeze(0) for tt in tokenized_texts])
-    attention_masks = torch.stack([tt['attention_mask'].squeeze(0) for tt in tokenized_texts])
-    labels = torch.tensor(labels)
-
-    # Create a TensorDataset from the loaded data
-    dataset = TensorDataset(input_ids, attention_masks, labels)
-
+    dataset = torch.load(filepath + '_data.pt')
     return dataset
 
 def md():
     processed_data_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data/processed')
+    print(processed_data_path)
 
     # Initializing the tokenizer for DistilBERT and tokenizing data
     tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
 
-    if all(check_processed_data_exists(os.path.join(processed_data_path, dataset)) for dataset in ['train', 'val', 'test']):
+    if all(check_processed_data_exists(os.path.join(processed_data_path, dataset)) for dataset in ['train_processed'
+                                                                                                   , 'val_processed'
+                                                                                                   , 'test_processed']):
+        print('!!!Loading processed data!!!')
         # Load processed data
-        train_dataset = load_processed_data(os.path.join(processed_data_path, 'train'))
-        val_dataset = load_processed_data(os.path.join(processed_data_path, 'val'))
-        test_dataset = load_processed_data(os.path.join(processed_data_path, 'test'))
+        train_dataset = load_processed_data(os.path.join(processed_data_path, 'train_processed'))
+        val_dataset = load_processed_data(os.path.join(processed_data_path, 'val_processed'))
+        test_dataset = load_processed_data(os.path.join(processed_data_path, 'test_processed'))
     else:
+        print('!!!Processing data!!!')
+
         # Load and process the data
         train_texts, train_labels = load_data('train.txt')
         train_labels = label_encoding(train_labels)
@@ -107,12 +115,14 @@ def md():
         val_dataset = EmotionDataset(val_encodings, val_labels)
         test_dataset = EmotionDataset(test_encodings, test_labels)
 
-        '''# Saving them
+        # Saving them
         save_processed_data(train_dataset, 'train')
         save_processed_data(val_dataset, 'val')
-        save_processed_data(test_dataset, 'test')'''
+        save_processed_data(test_dataset, 'test')
 
     return train_dataset, val_dataset, test_dataset
+
+md()
 
 if __name__ == '__main__':
     # Get the data and process it
