@@ -96,7 +96,6 @@ def load_processed_data(filepath):
 # Make Dataset method
 def md():
     processed_data_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data/processed')
-    print(processed_data_path)
     '''
         Initialize the tokenizer for text processing using DistilBert.
         DistilBertTokenizerFast is a tokenizer that is paired with the 'distilbert-base-uncased' 
@@ -111,11 +110,14 @@ def md():
     if all(check_processed_data_exists(os.path.join(processed_data_path, dataset)) for dataset in ['train_processed'
                                                                                                    , 'val_processed'
                                                                                                    , 'test_processed']):
+        print('Data already processed, loading it')
+
         # Load processed data
         train_dataset = load_processed_data(os.path.join(processed_data_path, 'train_processed'))
         val_dataset = load_processed_data(os.path.join(processed_data_path, 'val_processed'))
         test_dataset = load_processed_data(os.path.join(processed_data_path, 'test_processed'))
     else:
+        print('Processing and loading data')
         # Load and process the data
         train_texts, train_labels = load_data('train.txt')
         train_labels = label_encoding(train_labels)
