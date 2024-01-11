@@ -1,26 +1,18 @@
-import torch
+from transformers import DistilBertForSequenceClassification
+from transformers import AutoModelForSequenceClassification
 
-class MyNeuralNet(torch.nn.Module):
-    """ Basic neural network class. 
-    
-    Args:
-        in_features: number of input features
-        out_features: number of output features
-    
-    """
-    def __init__(self, in_features: int, out_features: int) -> None:
-        self.l1 = torch.nn.Linear(in_features, 500)
-        self.l2 = torch.nn.Linear(500, out_features)
-        self.r = torch.nn.ReLU()
-    
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward pass of the model.
-        
-        Args:
-            x: input tensor expected to be of shape [N,in_features]
+'''# Load pre-trained model with a classification head
+model = DistilBertForSequenceClassification.from_pretrained(
+    'distilbert-base-uncased',
+    num_labels=6,
+    output_attentions=False,
+    output_hidden_states=False,
+)'''
+# Defining labels and corresponding ids
+id2label = {0:'anger', 1:'fear', 2:'joy', 3:'love', 4:'sadness', 5:'surprise'}
+label2id = {'anger':0, 'fear':1, 'joy':2, 'love':3, 'sadness':4, 'surprise':5}
 
-        Returns:
-            Output tensor with shape [N,out_features]
-
-        """
-        return self.l2(self.r(self.l1(x)))
+# Defining the model
+model = AutoModelForSequenceClassification.from_pretrained(
+    "distilbert-base-uncased", num_labels=6, id2label=id2label, label2id=label2id
+)
