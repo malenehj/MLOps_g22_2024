@@ -90,8 +90,8 @@ def main(config):
     trainer.train()
 
     # Saving the trained model
-    model_path = './models'
-    trainer.save_pretrained(model_path)
+    model_path = '../models'
+    trainer.save_model(model_path)
 
     print('Model saved successfully at: ', model_path)
 
