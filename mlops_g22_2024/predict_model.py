@@ -1,17 +1,10 @@
-import torch
+import os
+from transformers import pipeline
 
-def predict(
-    model: torch.nn.Module,
-    dataloader: torch.utils.data.DataLoader
-) -> None:
-    """Run prediction for a given model and dataloader.
-    
-    Args:
-        model: model to use for prediction
-        dataloader: dataloader with batches
-    
-    Returns
-        Tensor of shape [N, d] where N is the number of samples and d is the output dimension of the model
+text = input('Write a sentence: ')  # the user inputs text to be predicted
 
-    """
-    return torch.cat([model(batch) for batch in dataloader], 0)
+current_dir = os.path.dirname(__file__)  # gets the directory where the predict_model script is located
+relative_path = os.path.join(current_dir, '..','outputs/2024-01-12/models') # navigates to the saved model
+
+classifier = pipeline("text-classification", model=relative_path)
+print(classifier(text))
