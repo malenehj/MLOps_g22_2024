@@ -1,23 +1,19 @@
 import os
 import pytest
 
-from torch.utils.data import DataLoader
-from mlops_g22_2024.data import make_dataset
+from mlops_g22_2024.data.make_dataset import md, EmotionDataset
 
-# base data-sets fixture, for use in tests below
-@pytest.fixture()
-def data_loaders():
-    return make_dataset.md()
 
-def test_basic_data_import(data_loaders):
-    train_dataloader, val_dataloader, test_dataloader = data_loaders
+def test_process_data():
+        
+    train_data, val_data, test_data = md()
 
-    # Testing if the dataloaders are of type DataLoader:
-    assert type(train_dataloader) == DataLoader
-    assert type(val_dataloader) == DataLoader
-    assert type(test_dataloader) == DataLoader
+    # # Testing type:
+    assert type(train_data) == EmotionDataset
+    assert type(val_data) == EmotionDataset
+    assert type(test_data) == EmotionDataset
 
     # Testing if the dataloaders are not empty:
-    assert len(train_dataloader) > 0
-    assert len(val_dataloader) > 0
-    assert len(test_dataloader) > 0
+    assert len(train_data) > 0
+    assert len(val_data) > 0
+    assert len(test_data) > 0

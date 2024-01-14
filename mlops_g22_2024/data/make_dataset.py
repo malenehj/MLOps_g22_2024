@@ -14,10 +14,10 @@ from transformers import DistilBertTokenizerFast
 from sklearn.preprocessing import LabelEncoder
 
 # Method for loading the data
-def load_data(filepath):
+def load_data(file_name, filepath = 'data/raw'):
     # Construct the path relative to the current script
     current_dir = os.path.dirname(__file__)  # gets the directory where the script is located
-    relative_path = os.path.join(current_dir, '..', '..', 'data/raw', filepath)
+    relative_path = os.path.join(current_dir, '..', '..', filepath, file_name)
     texts, labels = [], []
     with open(relative_path, 'r', encoding='utf-8') as file:
         for line in file:
