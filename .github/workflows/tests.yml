@@ -30,7 +30,7 @@ jobs:
         run: pip install -r requirements_dev.txt
 
       - name: Run pytest!
-        run: ls
+        run: pytest tests/
 
 
       # - name: Install dependencies
