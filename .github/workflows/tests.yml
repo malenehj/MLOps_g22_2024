@@ -18,16 +18,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Python and dependency setup
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        cache-dependency-path: '**/requirements-dev.txt'
+      - run: pip install -r requirements-dev.txt
 
-      - name: Install requirements.txt
-        run: pip install -r requirements.txt
+      # - name: Install requirements.txt
+      #   run: pip install -r requirements.txt
 
-      - name: Install requirements_dev.txt
-        run: pip install -r requirements_dev.txt
+      # - name: Install requirements_dev.txt
+      #   run: pip install -r requirements_dev.txt
 
       - name: Run pytest!
         run: pytest tests/
