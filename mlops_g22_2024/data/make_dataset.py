@@ -9,7 +9,6 @@
 
 import os
 import torch
-from torch.utils.data import Dataset
 from transformers import DistilBertTokenizerFast
 from sklearn.preprocessing import LabelEncoder
 

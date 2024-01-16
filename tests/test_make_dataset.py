@@ -1,8 +1,4 @@
-import os
-import pytest
-
 from mlops_g22_2024.data.make_dataset import md, EmotionDataset
-
 
 def test_process_data():
         
