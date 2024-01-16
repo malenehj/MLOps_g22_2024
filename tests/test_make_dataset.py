@@ -2,7 +2,7 @@ import torch
 from mlops_g22_2024.data.make_dataset import md, EmotionDataset, label_encoding, check_processed_data_exists
 
 
-def test_load_and_process_data():
+def test_load_and_process_of_data():
         
     train_data_1, val_data_1, test_data_1 = md()
 
@@ -28,9 +28,23 @@ def test_label_encoding():
     encoded_labels = label_encoding(labels)
     assert len(encoded_labels) == len(labels)
 
-def test_check_processed_data_exists():
-    # Test with a non-existing processed data file
-    non_existing_file = 'non_existing_processed'
-    non_existing_path = non_existing_file + '_data.pt'
-    assert not check_processed_data_exists(non_existing_path)
 
+def test_check_non_processed_data_exists():
+    # Test with a non-existing processed data file
+    assert not check_processed_data_exists('non_existing_processed')
+
+def test_check_processed_data_exists():
+    # Assume that a processed data file exists (for testing purposes)
+    assert check_processed_data_exists('data/processed/test_processed')
+
+def test_emotion_dataset():
+    encodings = torch.tensor([[1, 2, 3], [4, 5, 6]])
+    labels = torch.tensor([0, 1])
+    dataset = EmotionDataset(encodings, labels)
+
+    # Check the length of the dataset
+    assert len(dataset) == len(labels)
+
+    # Test __getitem__
+    sample = dataset[0]
+    assert isinstance(sample, dict)
