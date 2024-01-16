@@ -129,7 +129,9 @@ s232532, s213792, s237246, s173973, s230085
 >
 > Answer:
 
---- question 3 fill here ---
+For our project, we chose to utilise the Hugging Face Transformers framework along with FastAPI. The Transformers library provided us with a robust and efficient way to use a pre-trained model like DistilBERT for our text classification tasks. This framework significantly helped our development process as it offered pre-trained weights, and tokenizer utilities, which are essential for natural language processing tasks. It eliminated the need for building a model from scratch and allowed us to focus on fine-tuning the model for our specific use case: classifying emotional content in text. 
+
+On the other hand, FastAPI was our choice for creating a web application to serve our model. Its simplicity, speed, and ease of use for building APIs were invaluable, and it was also recommended in the project checklist and lecture materials. It allowed us to quickly set up a RESTful API that could receive text data, process it through our trained model, and return predictions.
 
 ## Coding environment
 
@@ -163,7 +165,10 @@ s232532, s213792, s237246, s173973, s230085
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
+From the cookiecutter template we used all of the folders with the exception of the ‘notebook’ folder, which we deleted. Besides the obvious folders with the python files for creating a dataset, training a model etc., we filled up the outer data folder. In the ‘raw’ file we put in our 3 .txt files (the training, test and validation dataset) and after processing the data, it is saved in the ‘processed’ folder, from where it is used to train and test our model.
+
+After training, our model is saved into the outer ‘models’ folder. We also filled out the ‘tests’ and ‘dockerfiles’ as described in the exercises on the course website. In our inner project folder we created an extra folder named: ’wandb’, that is used for our Weights and Bias (wandb) that we use for logging our model. We also added a ‘config’ folder in the inner project folder with a config.yaml file, that we use for hydra in our train_model.py file for writing config files to keep track of hyperparameters.
+The rest was self-explanatory, like the inner ‘models’ and ‘data’ folders.
 
 ### Question 6
 
@@ -174,7 +179,9 @@ s232532, s213792, s237246, s173973, s230085
 >
 > Answer:
 
---- question 6 fill here ---
+Everybody in our project group was responsible for their part of the code or configurations. We generally tried to implement the PEP8 coding practises to ensure our code was not only understandable but also primed for subsequent utilisation.
+
+We wrote a short description in the beginning of the different python files to give the user a quick overview of what our file does. We did something similar with the more complex methods, to make it easier for everybody to understand (also for us in the future).
 
 ## Version control
 
@@ -238,7 +245,9 @@ s232532, s213792, s237246, s173973, s230085
 >
 > Answer:
 
---- question 10 fill here ---
+We implemented DVC in our project to streamline collaboration, ensure reproducibility, and familiarise ourselves with handling large datasets, preparing us for future scalability challenges. By integrating the Google Drive extension with DVC, our team could seamlessly access and share data, significantly enhancing collaborative efficiency. This setup allowed for real-time synchronisation of data changes, ensuring that all team members had access to the latest versions of datasets. 
+
+When we transitioned to a Google Cloud Platform (GCP) environment, we leveraged DVC's capabilities further by using a GCP bucket for data storage. This shift to cloud storage facilitated more robust data handling and version control, especially beneficial for managing larger datasets. The DVC extension for GCP streamlined our workflow by enabling direct data pushes to the cloud, thereby optimising our data storage and access strategy.
 
 ### Question 11
 

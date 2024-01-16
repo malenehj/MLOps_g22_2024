@@ -21,13 +21,9 @@ jobs:
 
       - name: Cache
         uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: 'pip'
-          cache-dependency-path: '**/requirements_dev.txt'
 
-      - name: Install requirements_dev
-        run: pip install -r requirements_dev.txt
+      - name: Install ruff
+        run: pip install ruff
 
       - name: Run pytest!
-        run: pytest tests/
+        run: ruff check
