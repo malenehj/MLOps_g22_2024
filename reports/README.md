@@ -236,7 +236,10 @@ Even if our tests had 100% coverage of our code, this would not be a guarantee o
 >
 > Answer:
 
---- question 9 fill here ---
+During the course of our project, we have made use of branches. This has primarily taken the form of having a master and a development branch. For larger additions to the project, we have generally created additional branches on which we made the initial implementation and testing of new features. Afterward, they have been merged into the development branch.
+
+To bring about the merges, we have made pull requests. However, due to the short time frame of the project, we have not enforced strict criteria for approving these code merges. Rather, everyone has had the right to merge without the inclusion of others, ensuring an expedited process. If the project scope had been larger or if more people had been involved, more elaborate merging criteria could have been appropriate.
+
 
 ### Question 10
 
