@@ -219,7 +219,9 @@ Additionally, we have implemented tests for model training, model loading, and m
 >
 > Answer:
 
---- question 8 fill here ---
+The total coverage of our unit tests is XX%. Naturally, 100% would be ideal, but our tests at least cover the main methods of our code and ensure some sanity checks on all of these. Although our tests do not cover the entire code, they will most likely catch any major errors introduced by new changes.
+
+Even if our tests had 100% coverage of our code, this would not be a guarantee of it working as intended under all circumstances. This could, for example, be due to the use of different method arguments, such as using a different dataset. Thus, even with 100% coverage by the unittests, additional tests testing different inputs could still be relevant.
 
 ### Question 9
 
