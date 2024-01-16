@@ -1,4 +1,4 @@
-name: CI-tests
+name: CI (pytests)
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Cache
+      - name: Cache and python setup
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
@@ -29,5 +29,5 @@ jobs:
       - name: Install requirements_dev
         run: pip install -r requirements_dev.txt
 
-      - name: Run pytest!
+      - name: Runing pytest
         run: pytest tests/
