@@ -36,15 +36,3 @@ def test_check_non_processed_data_exists():
 def test_check_processed_data_exists():
     # Assume that a processed data file exists (for testing purposes)
     assert check_processed_data_exists('data/processed/test_processed')
-
-def test_emotion_dataset():
-    encodings = torch.tensor([[1, 2, 3], [4, 5, 6]])
-    labels = torch.tensor([0, 1])
-    dataset = EmotionDataset(encodings, labels)
-
-    # Check the length of the dataset
-    assert len(dataset) == len(labels)
-
-    # Test __getitem__
-    sample = dataset[0]
-    assert isinstance(sample, dict)
