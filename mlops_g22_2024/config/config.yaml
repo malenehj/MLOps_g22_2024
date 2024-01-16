@@ -3,3 +3,7 @@ train_batch_size: 16
 eval_batch_size: 16
 epochs: 2
 weight_decay: 0.01
+
+hydra:
+  run:
+    dir: .
