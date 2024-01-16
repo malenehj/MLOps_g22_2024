@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'mlops-g22-2024-411309/emotiondetection', './dockerfiles']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'mlops-g22-2024-411309/emotiondetection']

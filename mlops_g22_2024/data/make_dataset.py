@@ -9,7 +9,6 @@
 
 import os
 import torch
-from torch.utils.data import Dataset
 from transformers import DistilBertTokenizerFast
 from sklearn.preprocessing import LabelEncoder
 
@@ -107,10 +106,9 @@ def md():
     '''
     tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
     # Check if datasets have already been processed and are ready to use
-    if False:
-        all(check_processed_data_exists(os.path.join(processed_data_path, dataset)) for dataset in ['train_processed'
+    if all(check_processed_data_exists(os.path.join(processed_data_path, dataset)) for dataset in ['train_processed'
                                                                                                    , 'val_processed'
-                                                                                                   , 'test_processed'])
+                                                                                                   , 'test_processed']):
         print('Data already processed, loading it')
 
         # Load processed data
