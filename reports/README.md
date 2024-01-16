@@ -200,7 +200,11 @@ We wrote a short description in the beginning of the different python files to g
 >
 > Answer:
 
---- question 7 fill here ---
+In total, we have implemented XX tests. 
+These tests cover loading the datasets, the text processing and the storage of it. Also, if the processed data can be reloaded and are of appropriate type and dimensions. 
+
+Additionally, we have implemented tests for model training, model loading, and model predictions……
+
 
 ### Question 8
 
