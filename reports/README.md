@@ -263,7 +263,14 @@ When we transitioned to a Google Cloud Platform (GCP) environment, we leveraged 
 >
 > Answer:
 
-Mathias is working on this
+The continuous integration (CI) setup implemented in this project is primarily comprised of unittests. These tests have been configured to be executed through GitHub Actions upon code push. To ensure compatibility of our code, the tests are carried out on multiple operating systems, namely Linux, Windows, and macOS (all of the latest versions). The tests are exclusively executed on Python version 3.11, as it is the only relevant version for the scope of this project. If we were to deploy our code and model on a larger scale, with multiple users, it could have been relevant to test the code on multiple Python versions. This could furthermore include testing on different versions of key libraries such as PyTorch and the Transformers framework. Caching has been established on GitHub to store Python libraries (such as PyTorch, NumPy, etc.), aiming to expedite the run time of the unit tests.
+
+Additionally, a limited check of the code is carried out by running the "ruff check" command as a GitHub action. It could have been relevant to enforce stricter practices for formatting of our code and run "rough format" upon push to GitHub. However, due to the limited nature of the project, we decided not to place great emphasis on this.
+
+Two examples of the applied workflow files and the associated executions on GitHub may be found via the links below:
+https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914485/workflow
+https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
+
 
 ## Running code and tracking experiments
 
