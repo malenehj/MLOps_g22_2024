@@ -268,7 +268,9 @@ The continuous integration (CI) setup implemented in this project is primarily c
 Additionally, a limited check of the code is carried out by running the "ruff check" command as a GitHub action. It could have been relevant to enforce stricter practices for formatting of our code and run "rough format" upon push to GitHub. However, due to the limited nature of the project, we decided not to place great emphasis on this.
 
 Two examples of the applied workflow files and the associated executions on GitHub may be found via the links below:
+
 https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914485/workflow
+
 https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 
 
