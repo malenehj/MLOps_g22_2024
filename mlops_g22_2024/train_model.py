@@ -34,9 +34,16 @@ os.environ["HYDRA_FULL_ERROR"] = "1"
 # Define the main function with Hydra's configuration management
 @hydra.main(config_path='./config', config_name='config')
 def main(config):
-    # Convert Hydra configuration to a dictionary and initialize wandb for experiment tracking.
-    config_dict = OmegaConf.to_container(config, resolve=True)
-    wandb.init(project='dtu_mlops24', notes="Testing the WANDB", config=config_dict)
+    use_wandb = os.getenv("USE_WANDB", "false").lower() == "true"
+    wandb_api_key = os.getenv("WANDB_API_KEY")
+
+    if use_wandb and wandb_api_key:
+        import wandb  # Import wandb only if needed
+        wandb.login(key=wandb_api_key)
+        # Convert Hydra configuration to a dictionary and initialize wandb for experiment tracking.
+        config_dict = OmegaConf.to_container(config, resolve=True)
+        wandb.init(project='dtu_mlops24', notes="Testing the WANDB", config=config_dict)
+
 
     # Convert Hydra configuration to a dictionary and initialize wandb for experiment tracking.
     tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
@@ -71,7 +78,7 @@ def main(config):
         save_strategy="epoch",
         load_best_model_at_end=True,
         push_to_hub=False,
-        report_to="wandb",
+        report_to="wandb" if use_wandb else "none",
         # run_name="bertdistil",  # name of the W&B run
         logging_steps=400,  # how often to log to W&B
     )
