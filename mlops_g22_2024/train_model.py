@@ -9,6 +9,7 @@ from data.make_dataset import md
 from models.model import model
 from omegaconf import OmegaConf
 import sys
+from torch.profiler import profile, record_function, ProfilerActivity
 
 # sys.path.append("./")
 
@@ -96,11 +97,18 @@ def main(config):
         data_collator=None,
         compute_metrics=compute_metrics,
     )
-
-    trainer.train()
+    #Profiler implementation
+    # with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
+            #  record_shapes=True,
+            #  with_stack=True,
+            #  profile_memory=True,
+            #  on_trace_ready=torch.profiler.tensorboard_trace_handler('profiler')) as prof:
+        # trainer.train()
+    # 
 
     # Saving the trained model
     model_path = '../models'
+
     
     trainer.save_model(model_path)
 
