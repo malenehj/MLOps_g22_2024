@@ -319,7 +319,7 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 >
 > Answer: 
 
-In our methodology, configuration files are key. For every experiment conducted, the used hyperparameters are recorded in a specially designed configuration file for that experiment. This system is anchored by a central file, config.yaml, which links to various experiment-specific config files. When hyperparameters are overridden via command line, we ensure no data is lost by employing the WandB API. This API effectively captures all hyperparameters and other vital metrics for each experiment. Replicating an experiment is straightforward: one needs to select the appropriate .yaml file and integrate it using the hydra decorator in this manner: @hydra.main(config_path="../config", config_name="SELECTED_EXPERIMENT_FILE.yaml")
+In our methodology, configuration files are key. For every experiment conducted, the used hyperparameters are recorded in a specially designed configuration file for that experiment. This system is anchored by a central file, config.yaml, which links to various experiment-specific config files. When hyperparameters are overridden via command line, we ensure no data is lost by employing the WandB API. This API effectively captures all hyperparameters and other vital metrics for each experiment. Replicating an experiment is straightforward: one needs to select the appropriate .yaml file and integrate it using the hydra decorator in this manner: @hydra.main(config_path="../config", config_name="SELECTED_EXPERIMENT_FILE.yaml"). The file structure of our config files is as follows:![config](image.png)
 
 ### Question 14
 
