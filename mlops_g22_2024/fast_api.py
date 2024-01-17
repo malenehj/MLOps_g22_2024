@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from http import HTTPStatus
-from predict_model import predict
+from mlops_g22_2024.predict_model import predict
 import uvicorn
 
 app = FastAPI()
@@ -17,5 +17,5 @@ def is_emotion(text: str):
     return response
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8500)
+#if __name__ == "__main__":
+#    uvicorn.run(app, host="0.0.0.0", port=8500)

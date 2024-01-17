@@ -1,7 +1,7 @@
 #Base image
 FROM --platform=linux/amd64 python:3.11-slim
 
-EXPOSE 8500
+EXPOSE $PORT
 
 WORKDIR /
 
@@ -21,23 +21,4 @@ COPY models/ models/
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "mlops_g22_2024/fast_api.py", "--server.port=8500", "--server.address=0.0.0.0"]
-
-
-# Base image
-#FROM python:3.11-slim
-
-#RUN apt update && \
-#    apt install --no-install-recommends -y build-essential gcc && \
-#    apt clean && rm -rf /var/lib/apt/lists/*
-
-#COPY requirements.txt requirements.txt
-#COPY pyproject.toml pyproject.toml
-#COPY mlops_g22_2024/ mlops_g22_2024/
-#COPY data/ data/
-
-#WORKDIR /
-#RUN pip install -r requirements.txt --no-cache-dir
-#RUN pip install . --no-deps --no-cache-dir
-
-#ENTRYPOINT ["python", "-u", "mlops_g22_2024/predict_model.py"]
+CMD exec uvicorn mlops_g22_2024.fast_api:app --port $PORT --host 0.0.0.0 --workers 1
