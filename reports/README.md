@@ -151,7 +151,9 @@ On the other hand, FastAPI was our choice for creating a web application to serv
 > Answer:
 
 We have managed dependencies by having two requirements files: one named “requirements.txt” and one “requirements_dev.txt”. The former contains the required libraries and their respective versions for running the code. The latter contains additional libraries which is used in the development and maintenance of the code (e.g. pytest).
+
 To recreate our environment, one could, for instance2, create a virtual python environment in conda . Hereafter, the requirements could be installed via pip i.e., “pip install -r requirements.txt” or “requirements_dev.txt”.
+
 We have only listed kye dependencies in these files, and not used functionalities such as “pip freeze” which list an exhaustive list of the used packages. If harsher requirements were necessary with respect to the reproducibility of our project, which could have been used. Due to the limited scope of our project, this was not done. 
 
 ### Question 5
