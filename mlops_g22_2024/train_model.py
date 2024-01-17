@@ -62,11 +62,11 @@ def main(config):
     # Defining the training arguments
     training_args = TrainingArguments(
         output_dir="./models",
-        learning_rate=config.lr,
-        per_device_train_batch_size=config.train_batch_size,
-        per_device_eval_batch_size=config.eval_batch_size,
-        num_train_epochs=config.epochs,
-        weight_decay=config.weight_decay,
+        learning_rate=config.train.lr,
+        per_device_train_batch_size=config.train.train_batch_size,
+        per_device_eval_batch_size=config.train.eval_batch_size,
+        num_train_epochs=config.train.epochs,
+        weight_decay=config.train.weight_decay,
         evaluation_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
