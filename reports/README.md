@@ -150,7 +150,11 @@ On the other hand, FastAPI was our choice for creating a web application to serv
 >
 > Answer:
 
-Mathias Working on this
+We have managed dependencies by having two requirements files: one named “requirements.txt” and one “requirements_dev.txt”. The former contains the required libraries and their respective versions for running the code. The latter contains additional libraries which is used in the development and maintenance of the code (e.g. pytest).
+
+To recreate our environment, one could, for instance2, create a virtual python environment in conda . Hereafter, the requirements could be installed via pip i.e., “pip install -r requirements.txt” or “requirements_dev.txt”.
+
+We have only listed kye dependencies in these files, and not used functionalities such as “pip freeze” which list an exhaustive list of the used packages. If harsher requirements were necessary with respect to the reproducibility of our project, which could have been used. Due to the limited scope of our project, this was not done. 
 
 ### Question 5
 
@@ -165,7 +169,7 @@ Mathias Working on this
 > *experiments.*
 > Answer:
 
-From the cookiecutter template we used all of the folders with the exception of the ‘notebook’ folder, which we deleted. Besides the obvious folders with the python files for creating a dataset, training a model etc., we filled up the outer data folder. In the ‘raw’ file we put in our 3 .txt files (the training, test and validation dataset) and after processing the data, it is saved in the ‘processed’ folder, from where it is used to train and test our model.
+From the cookiecutter template we used all of the folders with the exception of the ‘notebook’ folder, which we deleted. Besides the obvious folders with the python files for creating a dataset, training a model etc., we filled up the outer data folder. In the ‘raw’ file we put in our 3 .txt files (if pulled via dvc the raw folder wil contain training, test and validation datasets) and after processing the data, it is saved in the ‘processed’ folder, from where it is used to train and test our model. 
 
 After training, our model is saved into the outer ‘models’ folder. We also filled out the ‘tests’ and ‘dockerfiles’ as described in the exercises on the course website. In our inner project folder we created an extra folder named: ’wandb’, that is used for our Weights and Bias (wandb) that we use for logging our model. We also added a ‘config’ folder in the inner project folder with a config.yaml file, that we use for hydra in our train_model.py file for writing config files to keep track of hyperparameters.
 The rest was self-explanatory, like the inner ‘models’ and ‘data’ folders.
