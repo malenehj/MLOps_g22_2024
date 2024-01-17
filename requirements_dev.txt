@@ -24,5 +24,6 @@ transformers == 4.36.2
 scikit-learn == 1.3.2
 dvc == 3.38.1
 dvc[gdrive]
+wandb==0.16.2
 
 #NB: we also need dvc[gs]
