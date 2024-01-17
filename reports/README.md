@@ -150,7 +150,7 @@ On the other hand, FastAPI was our choice for creating a web application to serv
 >
 > Answer:
 
---- question 4 fill here ---
+Mathias Working on this
 
 ### Question 5
 
@@ -200,7 +200,11 @@ We wrote a short description in the beginning of the different python files to g
 >
 > Answer:
 
---- question 7 fill here ---
+In total, we have implemented XX tests. 
+These tests cover loading the datasets, the text processing and the storage of it. Also, if the processed data can be reloaded and are of appropriate type and dimensions. 
+
+Additionally, we have implemented tests for model training, model loading, and model predictions……
+
 
 ### Question 8
 
@@ -215,7 +219,9 @@ We wrote a short description in the beginning of the different python files to g
 >
 > Answer:
 
---- question 8 fill here ---
+The total coverage of our unit tests is XX%. Naturally, 100% would be ideal, but our tests at least cover the main methods of our code and ensure some sanity checks on all of these. Although our tests do not cover the entire code, they will most likely catch any major errors introduced by new changes.
+
+Even if our tests had 100% coverage of our code, this would not be a guarantee of it working as intended under all circumstances. This could, for example, be due to the use of different method arguments, such as using a different dataset. Thus, even with 100% coverage by the unittests, additional tests testing different inputs could still be relevant.
 
 ### Question 9
 
@@ -230,7 +236,10 @@ We wrote a short description in the beginning of the different python files to g
 >
 > Answer:
 
---- question 9 fill here ---
+During the course of our project, we have made use of branches. This has primarily taken the form of having a master and a development branch. For larger additions to the project, we have generally created additional branches on which we made the initial implementation and testing of new features. Afterward, they have been merged into the development branch.
+
+To bring about the merges, we have made pull requests. However, due to the short time frame of the project, we have not enforced strict criteria for approving these code merges. Rather, everyone has had the right to merge without the inclusion of others, ensuring an expedited process. If the project scope had been larger or if more people had been involved, more elaborate merging criteria could have been appropriate.
+
 
 ### Question 10
 
@@ -263,7 +272,16 @@ When we transitioned to a Google Cloud Platform (GCP) environment, we leveraged 
 >
 > Answer:
 
-Mathias is working on this
+The continuous integration (CI) setup implemented in this project is primarily comprised of unittests. These tests have been configured to be executed through GitHub Actions upon code push. To ensure compatibility of our code, the tests are carried out on multiple operating systems, namely Linux, Windows, and macOS (all of the latest versions). The tests are exclusively executed on Python version 3.11, as it is the only relevant version for the scope of this project. If we were to deploy our code and model on a larger scale, with multiple users, it could have been relevant to test the code on multiple Python versions. This could furthermore include testing on different versions of key libraries such as PyTorch and the Transformers framework. Caching has been established on GitHub to store Python libraries (such as PyTorch, NumPy, etc.), aiming to expedite the run time of the unit tests.
+
+Additionally, a limited check of the code is carried out by running the "ruff check" command as a GitHub action. It could have been relevant to enforce stricter practices for formatting of our code and run "rough format" upon push to GitHub. However, due to the limited nature of the project, we decided not to place great emphasis on this.
+
+Two examples of the applied workflow files and the associated executions on GitHub may be found via the links below:
+
+https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914485/workflow
+
+https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
+
 
 ## Running code and tracking experiments
 
@@ -295,9 +313,9 @@ Mathias is working on this
 > *We made use of config files. Whenever an experiment is run the following happens: ... . To reproduce an experiment*
 > *one would have to do ...*
 >
-> Answer:
+> Answer: In our methodology, configuration files are key. For every experiment conducted, the used hyperparameters are recorded in a specially designed configuration file for that experiment. This system is anchored by a central file, config.yaml, which links to various experiment-specific config files. When hyperparameters are overridden via command line, we ensure no data is lost by employing the WandB API. This API effectively captures all hyperparameters and other vital metrics for each experiment. Replicating an experiment is straightforward: one needs to select the appropriate .yaml file and integrate it using the hydra decorator in this manner: @hydra.main(config_path="../config", config_name="SELECTED_EXPERIMENT_FILE.yaml")
 
---- question 13 fill here ---
+
 
 ### Question 14
 
