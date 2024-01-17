@@ -11,6 +11,10 @@ import os
 import torch
 from transformers import DistilBertTokenizerFast
 from sklearn.preprocessing import LabelEncoder
+import sys
+
+# sys.path.append("./")
+
 
 # Method for loading the data
 def load_data(file_name, filepath = 'data/raw'):
@@ -89,6 +93,13 @@ def check_processed_data_exists(filepath):
 
 def load_processed_data(filepath):
     # Load the saved tokenized texts and labels
+    print()
+    print()
+    print()
+    print(filepath + '_data.pt')
+    print()
+    print()
+    print()
     dataset = torch.load(filepath + '_data.pt')
     return dataset
 

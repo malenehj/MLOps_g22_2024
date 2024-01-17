@@ -8,6 +8,9 @@ from transformers import Trainer, TrainingArguments, DistilBertTokenizerFast
 from data.make_dataset import md
 from models.model import model
 from omegaconf import OmegaConf
+import sys
+
+# sys.path.append("./")
 
 """
     This script is designed for training a sequence classification model using the Hugging Face Transformers library. 
