@@ -303,8 +303,11 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
 > Answer:
+We used Hydra and different .yaml config files for our experiments. To integrate it we added the hydra decorator in our train_model.py file that is referencing to main config file. To alter the values before running the experiment one can either change the .yaml file itself or replace them inside the function by calling config.PARAMETER_NAME. This allows to change the hyperparameters from command line by adding them to run command as in the example:
 
---- question 12 fill here ---
+python train_model.py train.lr = 0.001 train.train_batch_sizes=64
+
+
 
 ### Question 13
 
