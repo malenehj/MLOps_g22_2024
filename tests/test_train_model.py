@@ -1,38 +1,48 @@
 import os
-from transformers import pipeline
+from transformers import DistilBertTokenizerFast
+from mlops_g22_2024.train_model import main
 
-
-def test_train_model():
+def test_main():
     # Define the configuration for testing
     config = {
-        "lr": 0.001,
-        "train_batch_size": 32,
-        "eval_batch_size": 64,
-        "epochs": 10,
-        "weight_decay": 0.01
+        "train": {
+            "lr": 0.001,
+            "train_batch_size": 32,
+            "eval_batch_size": 64,
+            "epochs": 10,
+            "weight_decay": 0.01
+        }
     }
 
+    # Set up any necessary environment variables
+    os.environ["USE_WANDB"] = "false"
 
+    # Call the main function
+    main(config)
 
     # Check if the trained model exists
     model_path = '../models'
-    # assert os.path.exists(model_path)
+    assert os.path.exists(model_path)
 
-    current_dir = os.path.dirname(__file__)  # gets the directory where the predict_model script is located
-    relative_path = os.path.join(current_dir, '..','outputs/2024-01-15/models') # navigates to the saved model
+    # Load the trained model and tokenizer
+    tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
+    model = AutoModelForSequenceClassification.from_pretrained(model_path)
 
-    # Load the trained model
-    classifier = pipeline("text-classification", model=relative_path)
-
-    # text_anger = "I hate my life"
+    # Perform some sample predictions
     text_happy = "my life is amazing"
-    text_tired = "I very tired today"
+    text_tired = "I am very tired today"
 
-    current_dir = os.path.dirname(__file__)  # gets the directory where the predict_model script is located
-    relative_path = os.path.join(current_dir, '..','outputs/2024-01-12/models') # navigates to the saved model
+    inputs_happy = tokenizer(text_happy, return_tensors="pt")
+    inputs_tired = tokenizer(text_tired, return_tensors="pt")
 
-    # Check if the model predicts the right label for the input text
-    # assert classifier(text_anger)[0]['label'] == 'anger'
-    assert classifier(text_happy)[0]["label"] == 'surprise'
-    assert classifier(text_tired)[0]["label"] == 'sadness'
+    outputs_happy = model(**inputs_happy)
+    outputs_tired = model(**inputs_tired)
 
+    # Check if the model predicts the labels correctly
+    expected_emotions = ['anger', 'fear', 'joy', 'love', 'sadness', 'surprise']
+
+    assert outputs_happy.logits.argmax().item() in expected_emotions
+    assert outputs_tired.logits.argmax().item() in expected_emotions
+
+    # Clean up any temporary files or directories
+    os.remove(model_path)
