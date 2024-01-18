@@ -204,10 +204,8 @@ We wrote a short description in the beginning of the different python files to g
 >
 > Answer:
 
-In total, we have implemented XX tests. 
-These tests cover loading the datasets, the text processing and the storage of it. Also, if the processed data can be reloaded and are of appropriate type and dimensions. 
-
-Additionally, we have implemented tests for model training, model loading, and model predictions……
+In total, we have implemented 5 tests. 
+These tests cover loading the datasets, the text processing and the storage of it. Also, if the processed data can be reloaded and are of appropriate type and dimensions. Additionally, we have implemented tests for model training, ideally testing the basic hyperparameter set up.
 
 
 ### Question 8
@@ -223,7 +221,13 @@ Additionally, we have implemented tests for model training, model loading, and m
 >
 > Answer:
 
-The total coverage of our unit tests is XX%. Naturally, 100% would be ideal, but our tests at least cover the main methods of our code and ensure some sanity checks on all of these. Although our tests do not cover the entire code, they will most likely catch any major errors introduced by new changes.
+The total coverage of our unit tests is rughly 98% of the make_dataset and train_model files, as seen on the example below:
+
+![image](https://github.com/malenehj/MLOps_g22_2024/assets/121713591/58ab7adc-65c9-412c-ba97-e19e24159298)
+
+(there are some discrepancy between the final master branch and the number above, as issues were encountered)
+
+Naturally, 100% would be ideal, but our tests at least cover the main methods of our code and ensure some sanity checks on all of these. Although our tests do not cover the entire code, they will most likely catch any major errors introduced by new changes.
 
 Even if our tests had 100% coverage of our code, this would not be a guarantee of it working as intended under all circumstances. This could, for example, be due to the use of different method arguments, such as using a different dataset. Thus, even with 100% coverage by the unittests, additional tests testing different inputs could still be relevant.
 
@@ -303,8 +307,10 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
 > 
-Answer:
-We used Hydra and different .yaml config files for our experiments. To integrate it we added the hydra decorator in our train_model.py file that is referencing the main config file. To alter the values before running the experiment one can either change the .yaml file itself or replace them inside the function by calling config.PARAMETER_NAME. This allows to change the hyperparameters from command line by adding them to run command as in the example:
+
+We used Hydra and different .yaml config files for our experiments. To integrate it we added the hydra decorator in our train_model.py file that is referencing the main config file. We also added the possible logging with weights and biases into our train_config.yaml file. One can choose by setting the ‘USE_WANDB’ value to ‘true’ of ‘false’.
+
+To alter the values before running the experiment one can either change the .yaml file itself or replace them inside the function by calling config.PARAMETER_NAME. This allows to change the hyperparameters from command line by adding them to run command as in the example:
 
 `python train_model.py train.lr = 0.001 train.train_batch_sizes=64`
 
@@ -356,16 +362,14 @@ Our project aimed for multiclass text classification, we monitored a variety of 
 >
 > Answer:
 
-For our project, we developed docker images for training and deployment. Our docker files are stored on our GitHub repository, in the folder "dockerfiles": https://github.com/malenehj/MLOps_g22_2024/tree/master/dockerfiles. Our locally built docker images are stored on the cloud, in our Container Registry. We also set up triggers that built docker images automatically using Cloud Build when new code was pushed to the project GitHub repository.
+In our project, we developed Docker images for distinct phases like training and deployment to ensure consistency and reproducibility across environments. The training image encapsulates the necessary environment for model training, including all dependencies and libraries, while the deployment image is streamlined for making predictions with the trained model, including a web server for API access.
 
-To build our model for deployment, one can use the code: 
-`docker build -f dockerfiles/predict_model.dockerfile . -t emotiondetection:latest` 
+Our dockerfiles are accessible in our GitHub repository at:
+https://github.com/malenehj/MLOps_g22_2024/tree/master/dockerfiles. The built images are hosted in our cloud-based Container Registry, facilitating easy pulling and deployment across our team's various development and production environments. 
 
-The built image can be run with the code: 
-`docker run -p 8000:8000 -e PORT=8000 emotiondetection:latest`
+To run our training Docker image, we use the command `docker run --rm -v $(pwd)/data:/data training_image:latest --lr=1e-3 --batch_size=64`, where training_image:latest is the tag of our Docker image. This command mounts the local data directory to the container for data access and sets hyperparameters for learning rate and batch size.
 
-This deploys the app to localhost, port 8000.
-
+To build our model for deployment, we use the command `docker build -f dockerfiles/predict_model.dockerfile . -t emotiondetection:latest`. The built image can then be run with the command `docker run -p 8000:8000 -e PORT=8000 emotiondetection:latest`. This deploys the app to localhost, port 8000.
 
 ### Question 16
 
