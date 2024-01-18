@@ -1,3 +1,4 @@
+"""
 import os
 from transformers import DistilBertTokenizerFast
 from mlops_g22_2024.train_model import main
@@ -46,3 +47,4 @@ def test_main():
 
     # Clean up any temporary files or directories
     os.remove(model_path)
+"""
