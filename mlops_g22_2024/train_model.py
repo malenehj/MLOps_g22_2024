@@ -55,7 +55,11 @@ def main(config):
     # --- MODEL TRAINING --- #
 
     # Set the training device (GPU or CPU).
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    # device = "mps" if torch.backends.mps.is_available() else "cpu"
+    device = "cuda" if torch.cuda.is_available() else 'cpu'
+    print('---------')
+    print('DEVICE: ', device)
+    print('---------')
     device = torch.device(device)
     print(f"Using device: {device}")
 
