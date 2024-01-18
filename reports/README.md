@@ -370,7 +370,7 @@ In our methodology, configuration files are key. For every experiment conducted,
 >
 > Answer:
 
-In our development process, debugging responsibilities were distributed among team members, with each one focusing on their respective sections of the codebase. We took an approach to debugg by setting breakpoints throughout the code. This allowed us to examine the flow of execution and the state of variables in real-time, checking the code behaviour at critical junctures.
+In our development process, debugging responsibilities were distributed among team members, with each one focusing on their respective sections of the codebase. We took an approach to debug by setting breakpoints throughout the code. This allowed us to examine the flow of execution and the state of variables in real-time, checking the code behaviour at critical junctures.
 While we did consider utilizing torch.profiler to optimize our code further, we observed that due to the nature of our project, which heavily relies on the pre-built modules from the Transformers framework, the scope for performance improvement was limited. Our codebase is straightforward, primarily employing these built-in Transformer objects that are already optimized on top of PyTorch. Hence, there doesnt seem to be significant room for enhacement through profilling.
 ## Working in the cloud
 
@@ -411,7 +411,7 @@ While we did consider utilizing torch.profiler to optimize our code further, we 
 >
 > Answer:
 
---- question 19 fill here ---
+![An image of our GCP Bucket:](figures/bucket_g22.png)
 
 ### Question 20
 
@@ -420,7 +420,7 @@ While we did consider utilizing torch.profiler to optimize our code further, we 
 >
 > Answer:
 
---- question 20 fill here ---
+![An image of our GCP Container registry:](figures/registry_g22.png)
 
 ### Question 21
 
@@ -429,7 +429,7 @@ While we did consider utilizing torch.profiler to optimize our code further, we 
 >
 > Answer:
 
---- question 21 fill here ---
+We did not have success ... 
 
 ### Question 22
 
