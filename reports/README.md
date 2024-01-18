@@ -360,7 +360,7 @@ Our project aimed for multiclass text classification, we monitored a variety of 
 
 For In our project, we developed Docker images for distinct phases like training and deployment to ensure consistency and reproducibility across environments. The training image encapsulates the necessary environment for model training, including all dependencies and libraries, while the deployment image is streamlined for running the trained model, possibly including a web server for API access.
 
-To run our training Docker image, we use the command docker run --rm -v $(pwd)/data:/data training_image:latest --lr=1e-3 --batch_size=64, where training_image:latest is the tag of our Docker image. This command mounts the local data directory to the container for data access and sets hyperparameters for learning rate and batch size. For deployment, we use a similar command, adjusting parameters as necessary for the deployment environment.
+To run our training Docker image, we use the command `docker run --rm -v $(pwd)/data:/data training_image:latest --lr=1e-3 --batch_size=64`, where training_image:latest is the tag of our Docker image. This command mounts the local data directory to the container for data access and sets hyperparameters for learning rate and batch size. For deployment, we use a similar command, adjusting parameters as necessary for the deployment environment.
 
 Our Dockerfiles are accessible in our GitHub repository at:
 https://github.com/malenehj/MLOps_g22_2024/tree/master/dockerfiles. 
