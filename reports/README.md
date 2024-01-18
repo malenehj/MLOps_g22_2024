@@ -537,12 +537,9 @@ A combination of FastAPI and Cloud Run were used to deploy our project to an end
 
 Several challenges were encountered throughout the project:
 
--…
+- We have encountered several problems with GCP. While we have been able to run model training via a cloud VM, we faced compatibility issues with the GCP GPU drivers. Consequently, we were only able to use the CPU for training, which did not provide a significant improvement over local training. We attempted to circumvent this issue by building our Docker image on the VM itself and deploying one of our prebuilt images to the VM. However, in the former case, the image unfortunately did not build successfully, even though this had been done locally. In the latter case, the container was not deployed (for unknown reasons).
 
 - A challenge encountered throughout the project was resolving merge conflicts. As this project has dealt with many different aspects in a short timeframe, and with five people working on them simultaneously, we have not enforced any strict merge criteria (on GitHub), to enable a fast development phase. This approach has, however, led to dealing with bugs introduced by these merge conflicts not being resolved in a proper manner. In the future this could perhaps have been resolved by making sure that multiple people approve the merges first, as well as requiring that the code passes all CI tests.
-
--…
-
 
 ### Question 27
 
