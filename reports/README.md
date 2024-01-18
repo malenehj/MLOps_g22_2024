@@ -510,7 +510,7 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 
 ![An image showing the overview of tools in our MLOps project](figures/overview_g22.jpg)
 
-The diagram is split into two overall categories: tools and tasks taking place (1) on our respective local machines and (2) on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model.  
+The diagram is split into two overall categories: tools and tasks taking place (1) on our respective local machines and (2) on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model. 
 
 ### Question 26
 
