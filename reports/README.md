@@ -511,7 +511,17 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 
 ![An image showing the overview of tools in our MLOps project](figures/overview_g22.jpg)
 
-The diagram is split into two overall categories: tools and tasks taking place (1) on our respective local machines and (2) on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model. 
+The diagram is split into two overall categories: tools and tasks taking place (1) on our respective local machines and (2) on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model. We used the framework Weights and Biases to log experiment performance and Hydra to run config files to easily log and change varying experiment criteria. 
+
+Data was originally stored in G-Drive, but was moved to a GCP Cloud Storage Bucket, and DVC was used to pull and push data between the cloud and local machines to ensure data version control. 
+
+Docker was used to build and run images of our training and prediction algorithms. Docker helps to ensure that the project is easily reproducible by creating an image of all essential dependencies. 
+
+On the cloud, project code was stored in our GitHub repository, using a Cookiecutter template to enforce standardized project organization. Pytest assisted with continuous integration by running checks on all pull requests. 
+
+GCP functionalities were used for different tasks. Cloud Build was used to trigger automatic building of docker images when new code was pushed to a specific branch of the repository. The Container Registry was used to store docker images. Compute Engine was used to train the model. 
+
+Finally, the project was deployed using FastAPI to create a prediction application and Cloud Run to deploy to the cloud.
 
 ### Question 26
 
