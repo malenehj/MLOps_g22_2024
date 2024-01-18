@@ -356,11 +356,16 @@ Our project aimed for multiclass text classification, we monitored a variety of 
 >
 > Answer:
 
-For our project, we developed docker images for training and deployment. (xxx ... xxx ... xxx FINISH FILLING IN HERE xxx ... xxx ... xxx)
+For our project, we developed docker images for training and deployment. Our docker files are stored on our GitHub repository, in the folder "dockerfiles": https://github.com/malenehj/MLOps_g22_2024/tree/master/dockerfiles. Our locally built docker images are stored on the cloud, in our Container Registry. We also set up triggers that built docker images automatically using Cloud Build when new code was pushed to the project GitHub repository.
 
-Our docker files are stored on our GitHub repository, in the folder "dockerfiles": https://github.com/malenehj/MLOps_g22_2024/tree/master/dockerfiles. 
+To build our model for deployment, one can use the code: 
+`docker build -f dockerfiles/predict_model.dockerfile . -t emotiondetection:latest` 
 
-Our docker images are stored on the cloud, in our Container Registry. 
+The built image can be run with the code: 
+`docker run -p 8000:8000 -e PORT=8000 emotiondetection:latest`
+
+This deploys the app to localhost, port 8000.
+
 
 ### Question 16
 
@@ -412,7 +417,9 @@ We also experimented with Compute Engine for training our model and Cloud Build 
 >
 > Answer:
 
---- question 18 fill here ---
+We experimented with using the Compute Engine to run the training of our model, since this was the task that took the longest time and most compute power. However, we encountered some challenges when attempting this (also further explicated in question 26). We initially experimented with running our training code in a VM Instance initialized with publically available images, but discovered that the installed Python and PyTorch versions did not satisfy requirements for our project. We therefore focused our energy on creating a custom container specific to our project, which we could use to initialize the VM Instance. However, we encountered the problem that, when connecting to the VM Instance, we were only able to view an unknown docker image created 3 years ago, and we unfortunately ran out of project work time before we could find the cause of this issue.
+
+The Compute Engine and associated VM Instances are useful because they allow the developer to access hardware and compute power beyond their local machines, with which operations can be scaled, and they allow the developer to run code that takes a long time to complete in the "background" while their local environment is used for other things. 
 
 ### Question 19
 
@@ -439,8 +446,6 @@ We also experimented with Compute Engine for training our model and Cloud Build 
 >
 > Answer:
 
-We unfortunately did not have success with cloud build. We set up two different triggers, to build docker images for training and prediction, respectively. We suspect the failed build actions were caused by authentication problems, but we did not have time to debug fully. Here is an image of our attempts.
-
 ![An image of our cloud build attempts.](figures/build_g22.png)
 
 ### Question 22
@@ -457,7 +462,7 @@ We unfortunately did not have success with cloud build. We set up two different 
 >
 > Answer:
 
-We deployed our model using a combination of FastAPI, Docker, and GCP Cloud Run. We wrapped our model into an application using FastAPI. Since we had trouble getting Cloud Build to work correctly, we built a docker image locally that contains both the trained model and the FastAPI app and executes the app via uvicorn. The docker image was pushed to GCP Container Registry and deployed in the cloud using Cloud Run. We had to increase the default memory to make it work. To invoke the service, an end user would go to the URL https://emotiondetection-l4h23q4rda-ew.a.run.app/text_model/ in their browser and insert their sentence at the end of the URL (with normal spacing and punctuation, except "/" and "?", which are interpreted as continuing the path). The app will then return a HTTP status message and code as well as the emotion prediction ("sadness", "anger", "fear", "joy", "love", or "surprise") and the probability of the prediction.
+We deployed our model using a combination of FastAPI, Docker, and GCP Cloud Run. We wrapped our model into an application using FastAPI. Since we initially had trouble getting Cloud Build to work correctly, we built a docker image locally that contains both the trained model and the FastAPI app and executes the app via uvicorn. The docker image was pushed to GCP Container Registry and deployed in the cloud using Cloud Run. We had to increase the default memory to make it work. To invoke the service, an end user would go to the URL https://emotiondetection-l4h23q4rda-ew.a.run.app/text_model/ in their browser and insert their sentence at the end of the URL (with normal spacing and punctuation, except "/" and "?", which are interpreted as continuing the path). The app will then return a HTTP status message and code as well as the emotion prediction ("sadness", "anger", "fear", "joy", "love", or "surprise") and the probability of the prediction.
 
 ### Question 23
 
@@ -488,7 +493,7 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 >
 > Answer:
 
---- question 24 fill here ---
+Group member 1 used $3.37, group member 2 used ... . In total, ... credits were spent during development. The service costing most was cloud storage. If we had had more success with training our model on a VM Instance using the Compute Engine, this would likely have been more expensive. 
 
 ## Overall discussion of project
 
@@ -511,17 +516,11 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 
 ![An image showing the overview of tools in our MLOps project](figures/overview_g22.jpg)
 
-The diagram is split into two overall categories: tools and tasks taking place on our respective local machines and on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model. We used the framework Weights and Biases to log experiment performance and Hydra to run config files to easily log and change varying experiment criteria. 
+The diagram is split into two overall categories: tools and tasks taking place on our respective local machines and on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model. We used the framework Weights and Biases to log experiment performance and Hydra to run config files to easily log and change varying experiment criteria. Docker was used to build and run images of our training and prediction algorithms. Docker helps to ensure that the project is easily reproducible by creating an image of all essential dependencies. 
 
-Our data was originally stored on Google Drive, but was moved to a GCP Cloud Storage Bucket, and DVC was used to pull and push data between the cloud and local machines to ensure data version control. 
+On the cloud, our data was originally stored on Google Drive, but was moved to a GCP Cloud Storage Bucket, and DVC was used to pull and push data between the cloud and local machines to ensure data version control. Project code was stored in our GitHub repository, using a Cookiecutter template to enforce standardized project organization. Pytest assisted with continuous integration by running checks on all pull requests. 
 
-Docker was used to build and run images of our training and prediction algorithms. Docker helps to ensure that the project is easily reproducible by creating an image of all essential dependencies. 
-
-On the cloud, project code was stored in our GitHub repository, using a Cookiecutter template to enforce standardized project organization. Pytest assisted with continuous integration by running checks on all pull requests. 
-
-GCP functionalities were used for different tasks. Cloud Build was used to trigger automatic building of docker images when new code was pushed to a specific branch of the repository. The Container Registry was used to store docker images. Compute Engine was used to train the model (this did not work as intended). 
-
-A combination of FastAPI and Cloud Run were used to deploy our project to an end user. A prediction application was created with FastAPI and the app was deployed to the cloud via Cloud Run.
+GCP functionalities were used for different tasks. Cloud Build was used to trigger automatic building of docker images when new code was pushed to a specific branch of the repository. The Container Registry was used to store docker images. Compute Engine was used to train the model (this did not work as intended). A combination of FastAPI and Cloud Run were used to deploy our project to an end user. A prediction application was created with FastAPI and the app was deployed to the cloud via Cloud Run.
 
 ### Question 26
 
@@ -541,6 +540,7 @@ Several challenges were encountered throughout the project:
 
 - A challenge encountered throughout the project was resolving merge conflicts. As this project has dealt with many different aspects in a short timeframe, and with five people working on them simultaneously, we have not enforced any strict merge criteria (on GitHub), to enable a fast development phase. This approach has, however, led to dealing with bugs introduced by these merge conflicts not being resolved in a proper manner. In the future this could perhaps have been resolved by making sure that multiple people approve the merges first, as well as requiring that the code passes all CI tests.
 
+
 ### Question 27
 
 > **State the individual contributions of each team member. This is required information from DTU, because we need to**
@@ -556,4 +556,6 @@ Several challenges were encountered throughout the project:
 >
 > Answer:
 
---- question 27 fill here ---
+Student s237246 (Malene) was in charge of setting up the initial training and prediction code, the initial version of the FastAPI app, writing the initial dockerfile to be used in deployment, and final deployment of the model using Cloud Run. 
+
+All members contributed to the code by assisting each other in debugging, and all members contributed to writing the report. 
