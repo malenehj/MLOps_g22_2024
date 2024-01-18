@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from http import HTTPStatus
 from mlops_g22_2024.predict_model import predict
-import uvicorn
 
 app = FastAPI()
 
