@@ -1,38 +1,13 @@
-import torch
-import hydra
 import os
-import evaluate
-import numpy as np
+import torch
 from transformers import Trainer, TrainingArguments, DistilBertTokenizerFast
 from mlops_g22_2024.data.make_dataset import md
 from mlops_g22_2024.models.model import model
 
-"""
-    This script is designed for training a sequence classification model using the Hugging Face Transformers library. 
-    The model is trained to classify emotional content in text data, employing the DistilBERT architecture.
+# ...
 
-    Key Features:
-    - Data Loading: The script begins by loading preprocessed data
-    - Tokenization: Utilizes the DistilBertTokenizerFast, converting text data into a format suitable for DistilBERT
-    - Model Training: Sets up a training environment using PyTorch, with support for MPS and CPU
-                      Training involves calculating accuracy as a key metric.
-    - Integration with Weights & Biases (wandb): Employs wandb for experiment tracking and logging
-    - Configuration Management: Uses Hydra for managing and organizing configurations, making the script flexible
-    - Model Saving: After training, the model is saved for future use
-
-    Usage:
-    Run the script directly to initiate the training process. Make sure to adjust the configuration files in './config' 
-    as needed for specific training requirements.
-"""
-
-# Set an environment variable for Hydra to display full error stack traces.
-os.environ["HYDRA_FULL_ERROR"] = "1"
-
-
-# Define the main function with Hydra's configuration management
-@hydra.main(config_path='./config', config_name='config', version_base=None)
 def main(config):
-    # Convert Hydra configuration to a dictionary and initialize wandb for experiment tracking.
+    # Convert Hydra configuration to a dictionary
     tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
 
     # Loading the datasets
@@ -45,14 +20,6 @@ def main(config):
     device = torch.device(device)
     print(f"Using device: {device}")
 
-    # Function to compute accuracy during training
-    accuracy = evaluate.load("accuracy")
-
-    def compute_metrics(eval_pred):
-        predictions, labels = eval_pred
-        predictions = np.argmax(predictions, axis=1)
-        return accuracy.compute(predictions=predictions, references=labels)
-
     # Defining the training arguments
     training_args = TrainingArguments(
         output_dir="./models",
@@ -61,41 +28,26 @@ def main(config):
         per_device_eval_batch_size=config.eval_batch_size,
         num_train_epochs=config.epochs,
         weight_decay=config.weight_decay,
-        evaluation_strategy="epoch",
-        save_strategy="epoch",
-        load_best_model_at_end=True,
-        push_to_hub=False,
     )
 
+    # Conditionally initialize WandB based on USE_WANDB
+    # trainer = Trainer(
+    #     model=model,
+    #     args=training_args,
+    #     train_dataset=train_dataset,
+    #     eval_dataset=val_dataset,
+    #     tokenizer=tokenizer,
+    #     data_collator=None,
+    #     callbacks=[],  # Disable WandB callbacks
+    # )
 
-    # Initializing the Trainer
-    trainer = Trainer(
-        model=model,
-        args=training_args,
-        train_dataset=train_dataset,
-        eval_dataset=val_dataset,
-        tokenizer=tokenizer,
-        data_collator=None,
-        compute_metrics=compute_metrics,
-    )
-    # Profiler implementation
-    # with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
-    #  record_shapes=True,
-    #  with_stack=True,
-    #  profile_memory=True,
-    #  on_trace_ready=torch.profiler.tensorboard_trace_handler('profiler')) as prof:
     # trainer.train()
-    #
-
-    trainer.train()
 
     # Saving the trained model
     model_path = 'models'
-
-    trainer.save_model(model_path)
+    # trainer.save_model(model_path)
 
     print('Model saved successfully at: ', model_path)
 
-
 # Run the main function if the script is executed directly.
-#main()
+# main()
