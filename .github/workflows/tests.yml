@@ -26,6 +26,9 @@ jobs:
           cache: 'pip'
           cache-dependency-path: '**/requirements_dev.txt'
 
+      - name: Set USE_WANDB environment variable to false
+        run: echo "USE_WANDB=false" >> $GITHUB_ENV
+
       - name: Install requirements_dev
         run: pip install -r requirements_dev.txt
 
