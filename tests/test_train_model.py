@@ -15,7 +15,7 @@ class config():
 
 def test_train_model_1():
     f = config()
-    main(f)
+    assert main(f)
 
 """
 import os
