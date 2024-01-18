@@ -303,8 +303,10 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
 > 
-Answer:
-We used Hydra and different .yaml config files for our experiments. To integrate it we added the hydra decorator in our train_model.py file that is referencing the main config file. To alter the values before running the experiment one can either change the .yaml file itself or replace them inside the function by calling config.PARAMETER_NAME. This allows to change the hyperparameters from command line by adding them to run command as in the example:
+
+We used Hydra and different .yaml config files for our experiments. To integrate it we added the hydra decorator in our train_model.py file that is referencing the main config file. We also added the possible logging with weights and biases into our train_config.yaml file. One can choose by setting the ‘USE_WANDB’ value to ‘true’ of ‘false’.
+
+To alter the values before running the experiment one can either change the .yaml file itself or replace them inside the function by calling config.PARAMETER_NAME. This allows to change the hyperparameters from command line by adding them to run command as in the example:
 
 `python train_model.py train.lr = 0.001 train.train_batch_sizes=64`
 
@@ -356,11 +358,15 @@ Our project aimed for multiclass text classification, we monitored a variety of 
 >
 > Answer:
 
-For our project, we developed docker images for training and deployment. (xxx ... xxx ... xxx FINISH FILLING IN HERE xxx ... xxx ... xxx)
+For In our project, we developed Docker images for distinct phases like training and deployment to ensure consistency and reproducibility across environments. The training image encapsulates the necessary environment for model training, including all dependencies and libraries, while the deployment image is streamlined for running the trained model, possibly including a web server for API access.
 
-Our docker files are stored on our GitHub repository, in the folder "dockerfiles": https://github.com/malenehj/MLOps_g22_2024/tree/master/dockerfiles. 
+To run our training Docker image, we use the command docker run --rm -v $(pwd)/data:/data training_image:latest --lr=1e-3 --batch_size=64, where training_image:latest is the tag of our Docker image. This command mounts the local data directory to the container for data access and sets hyperparameters for learning rate and batch size. For deployment, we use a similar command, adjusting parameters as necessary for the deployment environment.
 
-Our docker images are stored on the cloud, in our Container Registry. 
+Our Dockerfiles are accessible in our GitHub repository at:
+https://github.com/malenehj/MLOps_g22_2024/tree/master/dockerfiles. 
+
+The Docker images themselves are hosted in our cloud-based Container Registry, facilitating easy pulling and deployment across our team's various development and production environments.
+ 
 
 ### Question 16
 
@@ -439,9 +445,7 @@ We also experimented with Compute Engine for training our model and Cloud Build 
 >
 > Answer:
 
-We unfortunately did not have success with cloud build. We set up two different triggers, to build docker images for training and prediction, respectively. We suspect the failed build actions were caused by authentication problems, but we did not have time to debug fully. Here is an image of our attempts.
-
-![An image of our cloud build attempts.](figures/build_g22.png)
+![An image of our cloud build attempts.](figures/build_q21.png)
 
 ### Question 22
 
