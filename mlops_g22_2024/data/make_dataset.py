@@ -11,7 +11,6 @@ import os
 import torch
 from transformers import DistilBertTokenizerFast
 from sklearn.preprocessing import LabelEncoder
-import sys
 
 # sys.path.append("./")
 
@@ -98,7 +97,6 @@ def load_processed_data(filepath):
 
 # Make Dataset method
 def md():
-    processed_data_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data/processed')
     '''
         Initialize the tokenizer for text processing using DistilBert.
         DistilBertTokenizerFast is a tokenizer that is paired with the 'distilbert-base-uncased' 

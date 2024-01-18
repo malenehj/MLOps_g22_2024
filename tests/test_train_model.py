@@ -1,27 +1,20 @@
-
-
-import torch
-
 import os
-os.environ["HYDRA_FULL_ERROR"] = "1"
 from mlops_g22_2024.train_model import main
 
+os.environ["HYDRA_FULL_ERROR"] = "1"
 
-    
+class config():
+
+    def __init__(self):
+        self.lr = 0.001
+        self.train_batch_size = 32
+        self.eval_batch_size = 64
+        self.epochs = 5
+        self.weight_decay = 0.01
+
 
 def test_train_model_1():
-
-    class config():
-
-        def __init__(self):
-            self.lr = 0.001
-            self.train_batch_size = 32
-            self.eval_batch_size = 64
-            self.epochs = 5
-            self.weight_decay = 0.01
-
     f = config()
-    
     main(f)
 
 """

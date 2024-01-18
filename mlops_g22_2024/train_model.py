@@ -65,8 +65,6 @@ def main(config):
         save_strategy="epoch",
         load_best_model_at_end=True,
         push_to_hub=False,
-        # run_name="bertdistil",  # name of the W&B run
-        logging_steps=400,  # how often to log to W&B
     )
 
 
