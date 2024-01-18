@@ -549,6 +549,10 @@ Several challenges were encountered throughout the project:
 
 - A challenge encountered throughout the project was resolving merge conflicts. As this project has dealt with many different aspects in a short timeframe, and with five people working on them simultaneously, we have not enforced any strict merge criteria (on GitHub), to enable a fast development phase. This approach has, however, led to dealing with bugs introduced by these merge conflicts not being resolved in a proper manner. In the future this could perhaps have been resolved by making sure that multiple people approve the merges first, as well as requiring that the code passes all CI tests.
 
+- Our project encountered challenges with Python file visibility and import issues, particularly relating to the directory structure and handling of config.yaml files. We addressed these by:
+1. Refactoring Directory Structure: We reorganised our directories to align with Python's module hierarchy, improving file access and reducing import errors.
+2. Utilizing Absolute Imports and Adjusting sys.path: We switched to absolute imports for clearer module referencing and dynamically modified sys.path in scripts, ensuring proper module and file detection.
+
 ### Question 27
 
 > **State the individual contributions of each team member. This is required information from DTU, because we need to**
