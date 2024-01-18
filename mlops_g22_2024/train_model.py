@@ -5,13 +5,10 @@ import os
 import evaluate
 import numpy as np
 from transformers import Trainer, TrainingArguments, DistilBertTokenizerFast
-from data.make_dataset import md
+from data.make_dataset import md, EmotionDataset
 from models.model import model
 from omegaconf import OmegaConf
-import sys
 from torch.profiler import profile, record_function, ProfilerActivity
-
-# sys.path.append("./")
 
 """
     This script is designed for training a sequence classification model using the Hugging Face Transformers library. 
@@ -109,6 +106,7 @@ def main(config):
     # Saving the trained model
     model_path = '../models'
 
+    trainer.train()
     
     trainer.save_model(model_path)
 
