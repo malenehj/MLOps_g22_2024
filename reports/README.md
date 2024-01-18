@@ -185,7 +185,7 @@ The rest is self-explanatory, like the inner ‘models’ and ‘data’ folders
 
 Everybody in our project group was responsible for their part of the code or configurations. We generally tried to implement the PEP8 coding practises to ensure our code was not only understandable but also primed for subsequent utilisation.
 
-We wrote a short description in the beginning of the different python files to give the user a quick overview of what our file does. We did something similar with the more complex methods, to make it easier for everybody to understand (also for us in the future).
+We wrote a short description in the beginning of the different python files to give the user a quick overview of what our file does. We did something similar with the more complex methods, to make it easier for everybody to understand (also for us in the future). In larger projects, it is important to have code format standards to ensure that other developers and future developers can easily understand and update the code.
 
 ## Version control
 
@@ -304,9 +304,9 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 >
 > 
 Answer:
-We used Hydra and different .yaml config files for our experiments. To integrate it we added the hydra decorator in our train_model.py file that is referencing to main config file. To alter the values before running the experiment one can either change the .yaml file itself or replace them inside the function by calling config.PARAMETER_NAME. This allows to change the hyperparameters from command line by adding them to run command as in the example:
+We used Hydra and different .yaml config files for our experiments. To integrate it we added the hydra decorator in our train_model.py file that is referencing the main config file. To alter the values before running the experiment one can either change the .yaml file itself or replace them inside the function by calling config.PARAMETER_NAME. This allows to change the hyperparameters from command line by adding them to run command as in the example:
 
-python train_model.py train.lr = 0.001 train.train_batch_sizes=64
+`python train_model.py train.lr = 0.001 train.train_batch_sizes=64`
 
 
 
@@ -508,7 +508,9 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 >
 > Answer:
 
---- question 25 fill here ---
+![An image showing the overview of tools in our MLOps project](figures/overview_g22.jpg)
+
+The diagram is split into two overall categories: tools and tasks taking place (1) on our respective local machines and (2) on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model.  
 
 ### Question 26
 
