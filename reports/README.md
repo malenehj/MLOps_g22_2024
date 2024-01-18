@@ -204,10 +204,8 @@ We wrote a short description in the beginning of the different python files to g
 >
 > Answer:
 
-In total, we have implemented XX tests. 
-These tests cover loading the datasets, the text processing and the storage of it. Also, if the processed data can be reloaded and are of appropriate type and dimensions. 
-
-Additionally, we have implemented tests for model training, model loading, and model predictions……
+In total, we have implemented 5 tests. 
+These tests cover loading the datasets, the text processing and the storage of it. Also, if the processed data can be reloaded and are of appropriate type and dimensions. Additionally, we have implemented tests for model training, ideally testing the basic hyperparameter set up.
 
 
 ### Question 8
