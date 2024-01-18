@@ -523,7 +523,14 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 >
 > Answer:
 
---- question 26 fill here ---
+Several challenges were encountered throughout the project:
+
+-…
+
+- A challenge encountered throughout the project was resolving merge conflicts. As this project has dealt with many different aspects in a short timeframe, and with five people working on them simultaneously, we have not enforced any strict merge criteria (on GitHub), to enable a fast development phase. This approach has, however, led to dealing with bugs introduced by these merge conflicts not being resolved in a proper manner. In the future this could perhaps have been resolved by making sure that multiple people approve the merges first, as well as requiring that the code passes all CI tests.
+
+-…
+
 
 ### Question 27
 
