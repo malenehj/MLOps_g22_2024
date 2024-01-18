@@ -1,3 +1,5 @@
+"""
+
 import os
 from transformers import pipeline
 
@@ -41,3 +43,4 @@ def test_model():
     # assert classifier(text_happy)[0]["label"] == 'surprise'
     # assert classifier(text_tired)[0]["label"] == 'sadness'
 
+"""

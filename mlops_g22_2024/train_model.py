@@ -1,17 +1,11 @@
 import torch
-import wandb
 import hydra
 import os
 import evaluate
 import numpy as np
 from transformers import Trainer, TrainingArguments, DistilBertTokenizerFast
-from data.make_dataset import md
-from models.model import model
-from omegaconf import OmegaConf
-import sys
-from torch.profiler import profile, record_function, ProfilerActivity
-
-# sys.path.append("./")
+from mlops_g22_2024.data.make_dataset import md
+from mlops_g22_2024.models.model import model
 
 """
     This script is designed for training a sequence classification model using the Hugging Face Transformers library. 
@@ -36,18 +30,8 @@ os.environ["HYDRA_FULL_ERROR"] = "1"
 
 
 # Define the main function with Hydra's configuration management
-@hydra.main(config_path='./config', config_name='config')
+@hydra.main(config_path='./config', config_name='config', version_base=None)
 def main(config):
-    use_wandb = os.getenv("USE_WANDB", "false").lower() == "true"
-    wandb_api_key = os.getenv("WANDB_API_KEY")
-
-    if use_wandb and wandb_api_key:
-        import wandb  # Import wandb only if needed
-        wandb.login(key=wandb_api_key)
-        # Convert Hydra configuration to a dictionary and initialize wandb for experiment tracking.
-        config_dict = OmegaConf.to_container(config, resolve=True)
-        wandb.init(project='dtu_mlops24', notes="Testing the WANDB", config=config_dict)
-
     # Convert Hydra configuration to a dictionary and initialize wandb for experiment tracking.
     tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
 
@@ -72,19 +56,19 @@ def main(config):
     # Defining the training arguments
     training_args = TrainingArguments(
         output_dir="./models",
-        learning_rate=config.train.lr,
-        per_device_train_batch_size=config.train.train_batch_size,
-        per_device_eval_batch_size=config.train.eval_batch_size,
-        num_train_epochs=config.train.epochs,
-        weight_decay=config.train.weight_decay,
+        learning_rate=config.lr,
+        per_device_train_batch_size=config.train_batch_size,
+        per_device_eval_batch_size=config.eval_batch_size,
+        num_train_epochs=config.epochs,
+        weight_decay=config.weight_decay,
         evaluation_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
         push_to_hub=False,
-        report_to="wandb" if use_wandb else "none",
         # run_name="bertdistil",  # name of the W&B run
         logging_steps=400,  # how often to log to W&B
     )
+
 
     # Initializing the Trainer
     trainer = Trainer(
@@ -108,7 +92,7 @@ def main(config):
     trainer.train()
 
     # Saving the trained model
-    model_path = '../models'
+    model_path = 'models'
 
     trainer.save_model(model_path)
 
@@ -116,4 +100,4 @@ def main(config):
 
 
 # Run the main function if the script is executed directly.
-main()
+#main()

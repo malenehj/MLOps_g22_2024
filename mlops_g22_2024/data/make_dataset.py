@@ -110,39 +110,39 @@ def md():
     '''
     tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
     # Check if datasets have already been processed and are ready to use
-    if all(check_processed_data_exists(os.path.join(processed_data_path, dataset)) for dataset in ['train_processed'
-                                                                                                   , 'val_processed'
-                                                                                                   , 'test_processed']):
-        print('Data already processed, loading it')
+    # if all(check_processed_data_exists(os.path.join(processed_data_path, dataset)) for dataset in ['train_processed'
+    #                                                                                                , 'val_processed'
+    #                                                                                                , 'test_processed']):
+    #     print('Data already processed, loading it')
 
-        # Load processed data
-        train_dataset = load_processed_data(os.path.join(processed_data_path, 'train_processed'))
-        val_dataset = load_processed_data(os.path.join(processed_data_path, 'val_processed'))
-        test_dataset = load_processed_data(os.path.join(processed_data_path, 'test_processed'))
-    else:
-        print('Processing and loading data')
-        # Load and process the data
-        train_texts, train_labels = load_data('train.txt')
-        train_labels = label_encoding(train_labels)
-        train_encodings = tokenizer(train_texts, truncation=True, padding=True)
+    #     # Load processed data
+    #     train_dataset = load_processed_data(os.path.join(processed_data_path, 'train_processed'))
+    #     val_dataset = load_processed_data(os.path.join(processed_data_path, 'val_processed'))
+    #     test_dataset = load_processed_data(os.path.join(processed_data_path, 'test_processed'))
+    # else:
+    print('Processing and loading data')
+    # Load and process the data
+    train_texts, train_labels = load_data('train.txt')
+    train_labels = label_encoding(train_labels)
+    train_encodings = tokenizer(train_texts, truncation=True, padding=True)
 
-        val_texts, val_labels = load_data('val.txt')
-        val_labels = label_encoding(val_labels)
-        val_encodings = tokenizer(val_texts, truncation=True, padding=True)
+    val_texts, val_labels = load_data('val.txt')
+    val_labels = label_encoding(val_labels)
+    val_encodings = tokenizer(val_texts, truncation=True, padding=True)
 
-        test_texts, test_labels = load_data('test.txt')
-        test_labels = label_encoding(test_labels)
-        test_encodings = tokenizer(test_texts, truncation=True, padding=True)
+    test_texts, test_labels = load_data('test.txt')
+    test_labels = label_encoding(test_labels)
+    test_encodings = tokenizer(test_texts, truncation=True, padding=True)
 
-        # Creating Dataset objects
-        train_dataset = EmotionDataset(train_encodings, train_labels)
-        val_dataset = EmotionDataset(val_encodings, val_labels)
-        test_dataset = EmotionDataset(test_encodings, test_labels)
+    # Creating Dataset objects
+    train_dataset = EmotionDataset(train_encodings, train_labels)
+    val_dataset = EmotionDataset(val_encodings, val_labels)
+    test_dataset = EmotionDataset(test_encodings, test_labels)
 
-        # Saving them
-        save_processed_data(train_dataset, 'train')
-        save_processed_data(val_dataset, 'val')
-        save_processed_data(test_dataset, 'test')
+    # Saving them
+    save_processed_data(train_dataset, 'train')
+    save_processed_data(val_dataset, 'val')
+    save_processed_data(test_dataset, 'test')
 
     return train_dataset, val_dataset, test_dataset
 

@@ -1,7 +1,6 @@
 defaults:
    # - model: model_config.yaml
-    - train: train_config.yaml
-    - exp1: exp1_config.yaml
+  - train: train_test_config.yaml
     
 hydra:
   run:
