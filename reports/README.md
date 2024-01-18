@@ -511,17 +511,17 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 
 ![An image showing the overview of tools in our MLOps project](figures/overview_g22.jpg)
 
-The diagram is split into two overall categories: tools and tasks taking place (1) on our respective local machines and (2) on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model. We used the framework Weights and Biases to log experiment performance and Hydra to run config files to easily log and change varying experiment criteria. 
+The diagram is split into two overall categories: tools and tasks taking place on our respective local machines and on the cloud. Locally, we used the Transformers framework from Huggingface to write script for training and making predictions with our model. We used the framework Weights and Biases to log experiment performance and Hydra to run config files to easily log and change varying experiment criteria. 
 
-Data was originally stored in G-Drive, but was moved to a GCP Cloud Storage Bucket, and DVC was used to pull and push data between the cloud and local machines to ensure data version control. 
+Our data was originally stored on Google Drive, but was moved to a GCP Cloud Storage Bucket, and DVC was used to pull and push data between the cloud and local machines to ensure data version control. 
 
 Docker was used to build and run images of our training and prediction algorithms. Docker helps to ensure that the project is easily reproducible by creating an image of all essential dependencies. 
 
 On the cloud, project code was stored in our GitHub repository, using a Cookiecutter template to enforce standardized project organization. Pytest assisted with continuous integration by running checks on all pull requests. 
 
-GCP functionalities were used for different tasks. Cloud Build was used to trigger automatic building of docker images when new code was pushed to a specific branch of the repository. The Container Registry was used to store docker images. Compute Engine was used to train the model. 
+GCP functionalities were used for different tasks. Cloud Build was used to trigger automatic building of docker images when new code was pushed to a specific branch of the repository. The Container Registry was used to store docker images. Compute Engine was used to train the model (this did not work as intended). 
 
-Finally, the project was deployed using FastAPI to create a prediction application and Cloud Run to deploy to the cloud.
+A combination of FastAPI and Cloud Run were used to deploy our project to an end user. A prediction application was created with FastAPI and the app was deployed to the cloud via Cloud Run.
 
 ### Question 26
 
@@ -537,12 +537,9 @@ Finally, the project was deployed using FastAPI to create a prediction applicati
 
 Several challenges were encountered throughout the project:
 
--…
+- We have encountered several problems with GCP. While we have been able to run model training via a cloud VM, we faced compatibility issues with the GCP GPU drivers. Consequently, we were only able to use the CPU for training, which did not provide a significant improvement over local training. We attempted to circumvent this issue by building our Docker image on the VM itself and deploying one of our prebuilt images to the VM. However, in the former case, the image unfortunately did not build successfully, even though this had been done locally. In the latter case, the container was not deployed (for unknown reasons).
 
 - A challenge encountered throughout the project was resolving merge conflicts. As this project has dealt with many different aspects in a short timeframe, and with five people working on them simultaneously, we have not enforced any strict merge criteria (on GitHub), to enable a fast development phase. This approach has, however, led to dealing with bugs introduced by these merge conflicts not being resolved in a proper manner. In the future this could perhaps have been resolved by making sure that multiple people approve the merges first, as well as requiring that the code passes all CI tests.
-
--…
-
 
 ### Question 27
 
