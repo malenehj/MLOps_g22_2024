@@ -12,3 +12,4 @@ wandb~=0.16.2
 evaluate~=0.4.1
 omegaconf~=2.3.0
 accelerate>=0.20.1
+wandb==0.16.2

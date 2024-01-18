@@ -302,9 +302,13 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 > Example:
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
-> Answer:
+> 
+Answer:
+We used Hydra and different .yaml config files for our experiments. To integrate it we added the hydra decorator in our train_model.py file that is referencing to main config file. To alter the values before running the experiment one can either change the .yaml file itself or replace them inside the function by calling config.PARAMETER_NAME. This allows to change the hyperparameters from command line by adding them to run command as in the example:
 
---- question 12 fill here ---
+python train_model.py train.lr = 0.001 train.train_batch_sizes=64
+
+
 
 ### Question 13
 
@@ -317,9 +321,9 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 > *We made use of config files. Whenever an experiment is run the following happens: ... . To reproduce an experiment*
 > *one would have to do ...*
 >
-> Answer: In our methodology, configuration files are key. For every experiment conducted, the used hyperparameters are recorded in a specially designed configuration file for that experiment. This system is anchored by a central file, config.yaml, which links to various experiment-specific config files. When hyperparameters are overridden via command line, we ensure no data is lost by employing the WandB API. This API effectively captures all hyperparameters and other vital metrics for each experiment. Replicating an experiment is straightforward: one needs to select the appropriate .yaml file and integrate it using the hydra decorator in this manner: @hydra.main(config_path="../config", config_name="SELECTED_EXPERIMENT_FILE.yaml")
+> Answer: 
 
-
+In our methodology, configuration files are key. For every experiment conducted, the used hyperparameters are recorded in a specially designed configuration file for that experiment. This system is anchored by a central file, config.yaml, which links to various experiment-specific config files. When hyperparameters are overridden via command line, we ensure no data is lost by employing the WandB API. This API effectively captures all hyperparameters and other vital metrics for each experiment. Replicating an experiment is straightforward: one needs to select the appropriate .yaml file and integrate it using the hydra decorator in this manner: @hydra.main(config_path="../config", config_name="SELECTED_EXPERIMENT_FILE.yaml"). The file structure of our config files is as follows:![config](image.png)
 
 ### Question 14
 
@@ -366,8 +370,8 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 >
 > Answer:
 
---- question 16 fill here ---
-
+In our development process, debugging responsibilities were distributed among team members, with each one focusing on their respective sections of the codebase. We took an approach to debug by setting breakpoints throughout the code. This allowed us to examine the flow of execution and the state of variables in real-time, checking the code behaviour at critical junctures.
+While we did consider utilizing torch.profiler to optimize our code further, we observed that due to the nature of our project, which heavily relies on the pre-built modules from the Transformers framework, the scope for performance improvement was limited. Our codebase is straightforward, primarily employing these built-in Transformer objects that are already optimized on top of PyTorch. Hence, there doesnt seem to be significant room for enhacement through profilling.
 ## Working in the cloud
 
 > In the following section we would like to know more about your experience when developing in the cloud.
@@ -407,7 +411,7 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 >
 > Answer:
 
---- question 19 fill here ---
+![An image of our GCP Bucket:](figures/bucket_g22.png)
 
 ### Question 20
 
@@ -416,7 +420,7 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 >
 > Answer:
 
---- question 20 fill here ---
+![An image of our GCP Container registry:](figures/registry_g22.png)
 
 ### Question 21
 
@@ -425,7 +429,9 @@ https://github.com/malenehj/MLOps_g22_2024/actions/runs/7543914477/workflow
 >
 > Answer:
 
---- question 21 fill here ---
+We unfortunately did not have success with cloud build. We set up two different triggers, to build docker images for training and prediction, respectively. We suspect the failed build actions were caused by authentication problems, but we did not have time to debug fully. Here is an image of our attempts.
+
+![An image of our cloud build attempts.](figures/build_g22.png)
 
 ### Question 22
 

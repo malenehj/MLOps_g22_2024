@@ -11,6 +11,10 @@ import os
 import torch
 from transformers import DistilBertTokenizerFast
 from sklearn.preprocessing import LabelEncoder
+import sys
+
+# sys.path.append("./")
+
 
 # Method for loading the data
 def load_data(file_name, filepath = 'data/raw'):
