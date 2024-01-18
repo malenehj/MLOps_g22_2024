@@ -8,6 +8,7 @@ from transformers import Trainer, TrainingArguments, DistilBertTokenizerFast
 from data.make_dataset import md
 from models.model import model
 from omegaconf import OmegaConf
+from dotenv import load_dotenv
 import sys
 from torch.profiler import profile, record_function, ProfilerActivity
 
@@ -34,15 +35,21 @@ from torch.profiler import profile, record_function, ProfilerActivity
 # Set an environment variable for Hydra to display full error stack traces.
 os.environ["HYDRA_FULL_ERROR"] = "1"
 
+# Load environment variables from the .env file
+load_dotenv()
 
 # Define the main function with Hydra's configuration management
 @hydra.main(config_path='./config', config_name='config')
 def main(config):
-    use_wandb = os.getenv("USE_WANDB", "false").lower() == "true"
+    use_wandb = os.getenv("USE_WANDB", "true").lower() == "true"
     wandb_api_key = os.getenv("WANDB_API_KEY")
+
+    print(use_wandb)
+    print(wandb_api_key)
 
     if use_wandb and wandb_api_key:
         import wandb  # Import wandb only if needed
+        print("wandb")
         wandb.login(key=wandb_api_key)
         # Convert Hydra configuration to a dictionary and initialize wandb for experiment tracking.
         config_dict = OmegaConf.to_container(config, resolve=True)
