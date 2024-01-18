@@ -225,6 +225,8 @@ The total coverage of our unit tests is rughly 98% of the make_dataset and train
 
 ![image](https://github.com/malenehj/MLOps_g22_2024/assets/121713591/58ab7adc-65c9-412c-ba97-e19e24159298)
 
+(there are some discrepancy between the final master branch and the number above, as issues were encountered)
+
 Naturally, 100% would be ideal, but our tests at least cover the main methods of our code and ensure some sanity checks on all of these. Although our tests do not cover the entire code, they will most likely catch any major errors introduced by new changes.
 
 Even if our tests had 100% coverage of our code, this would not be a guarantee of it working as intended under all circumstances. This could, for example, be due to the use of different method arguments, such as using a different dataset. Thus, even with 100% coverage by the unittests, additional tests testing different inputs could still be relevant.
