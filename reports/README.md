@@ -429,7 +429,9 @@ While we did consider utilizing torch.profiler to optimize our code further, we 
 >
 > Answer:
 
-We did not have success ... 
+We unfortunately did not have success with cloud build. We set up two different triggers, to build docker images for training and prediction, respectively. We suspect the failed build actions were caused by authentication problems, but we did not have time to debug fully. Here is an image of our attempts.
+
+![An image of our cloud build attempts.](figures/build_g22.png)
 
 ### Question 22
 
