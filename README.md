@@ -3,7 +3,7 @@
 This repository contains the project work carried out by group 22 for the MLOps course at DTU, January 2024. 
 
 **Project authors:** <br>
-Eszter Hetzmann (s232532) <br>
+Eszter Hetzmann (s232532) <br> HI
 Jakub Solis (s213792) <br>
 Malene Hornstrup Jespersen (s237246) <br>
 Mathias Stokkebye Nissen (s173973) <br>
