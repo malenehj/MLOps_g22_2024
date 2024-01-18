@@ -152,9 +152,9 @@ On the other hand, FastAPI was our choice for creating a web application to serv
 
 We have managed dependencies by having two requirements files: one named “requirements.txt” and one “requirements_dev.txt”. The former contains the required libraries and their respective versions for running the code. The latter contains additional libraries which is used in the development and maintenance of the code (e.g. pytest).
 
-To recreate our environment, one could, for instance2, create a virtual python environment in conda . Hereafter, the requirements could be installed via pip i.e., “pip install -r requirements.txt” or “requirements_dev.txt”.
+To recreate our environment, one could, for instance, create a virtual python environment in conda . Hereafter, the requirements could be installed via pip i.e., “pip install -r requirements.txt” or “requirements_dev.txt”.
 
-We have only listed kye dependencies in these files, and not used functionalities such as “pip freeze” which list an exhaustive list of the used packages. If harsher requirements were necessary with respect to the reproducibility of our project, which could have been used. Due to the limited scope of our project, this was not done. 
+We have only listed key dependencies in these files, and not used functionalities such as “pip freeze”, which returns an exhaustive list of the used packages. If harsher requirements were necessary with respect to the reproducibility of our project, this could have been used. However, this was not done due to the limited scope of our project. 
 
 ### Question 5
 
@@ -172,7 +172,7 @@ We have only listed kye dependencies in these files, and not used functionalitie
 From the cookiecutter template we used all of the folders with the exception of the ‘notebook’ folder, which we deleted. Besides the obvious folders with the python files for creating a dataset, training a model etc., we filled up the outer data folder. In the ‘raw’ file we put in our 3 .txt files (if pulled via dvc the raw folder wil contain training, test and validation datasets) and after processing the data, it is saved in the ‘processed’ folder, from where it is used to train and test our model. 
 
 After training, our model is saved into the outer ‘models’ folder. We also filled out the ‘tests’ and ‘dockerfiles’ as described in the exercises on the course website. In our inner project folder we created an extra folder named: ’wandb’, that is used for our Weights and Bias (wandb) that we use for logging our model. We also added a ‘config’ folder in the inner project folder with a config.yaml file, that we use for hydra in our train_model.py file for writing config files to keep track of hyperparameters.
-The rest was self-explanatory, like the inner ‘models’ and ‘data’ folders.
+The rest is self-explanatory, like the inner ‘models’ and ‘data’ folders.
 
 ### Question 6
 
@@ -355,7 +355,11 @@ In our methodology, configuration files are key. For every experiment conducted,
 >
 > Answer:
 
---- question 15 fill here ---
+For our project, we developed docker images for training and deployment. (xxx ... xxx ... xxx FINISH FILLING IN HERE xxx ... xxx ... xxx)
+
+Our docker files are stored on our GitHub repository, in the folder "dockerfiles": https://github.com/malenehj/MLOps_g22_2024/tree/master/dockerfiles. 
+
+Our docker images are stored on the cloud, in our Container Registry. 
 
 ### Question 16
 
@@ -371,7 +375,8 @@ In our methodology, configuration files are key. For every experiment conducted,
 > Answer:
 
 In our development process, debugging responsibilities were distributed among team members, with each one focusing on their respective sections of the codebase. We took an approach to debug by setting breakpoints throughout the code. This allowed us to examine the flow of execution and the state of variables in real-time, checking the code behaviour at critical junctures.
-While we did consider utilizing torch.profiler to optimize our code further, we observed that due to the nature of our project, which heavily relies on the pre-built modules from the Transformers framework, the scope for performance improvement was limited. Our codebase is straightforward, primarily employing these built-in Transformer objects that are already optimized on top of PyTorch. Hence, there doesnt seem to be significant room for enhacement through profilling.
+While we did consider utilizing torch.profiler to optimize our code further, we observed that due to the nature of our project, which heavily relies on the pre-built modules from the Transformers framework, the scope for performance improvement was limited. Our codebase is straightforward, primarily employing these built-in Transformer objects that are already optimized on top of PyTorch. Hence, there doesnt seem to be significant room for enhancement through profiling.
+
 ## Working in the cloud
 
 > In the following section we would like to know more about your experience when developing in the cloud.
@@ -387,7 +392,11 @@ While we did consider utilizing torch.profiler to optimize our code further, we 
 >
 > Answer:
 
---- question 17 fill here ---
+We used the following GCP services: Cloud Storage (Bucket), Artifact/Container Registry, Cloud Run. 
+
+Cloud Storage (Bucket) was used to store our data, connected via DVC for version control. The Artifact/Container Registry was used to store our docker images of model training and prediction. The prediction image (called "emotiondetection") was the image built to execute our FastAPI app for deployment. Finally, Cloud Run was used to deploy the FastAPI app. 
+
+We also experimented with Compute Engine for training our model and Cloud Build for building docker images in the cloud.
 
 ### Question 18
 
@@ -447,7 +456,7 @@ We unfortunately did not have success with cloud build. We set up two different 
 >
 > Answer:
 
---- question 22 fill here ---
+We deployed our model using a combination of FastAPI, Docker, and GCP Cloud Run. We wrapped our model into an application using FastAPI. Since we had trouble getting Cloud Build to work correctly, we built a docker image locally that contains both the trained model and the FastAPI app and executes the app via uvicorn. The docker image was pushed to GCP Container Registry and deployed in the cloud using Cloud Run. We had to increase the default memory to make it work. To invoke the service, an end user would go to the URL https://emotiondetection-l4h23q4rda-ew.a.run.app/text_model/ in their browser and insert their sentence at the end of the URL (with normal spacing and punctuation, except "/" and "?", which are interpreted as continuing the path). The app will then return a HTTP status message and code as well as the emotion prediction ("sadness", "anger", "fear", "joy", "love", or "surprise") and the probability of the prediction.
 
 ### Question 23
 
@@ -462,7 +471,9 @@ We unfortunately did not have success with cloud build. We set up two different 
 >
 > Answer:
 
---- question 23 fill here ---
+We did not manage to implement monitoring. We would like to have monitoring implemented such that over time, we could measure data drifting. In our example, we might imagine developments in language (for instance, emergence of new slang) that changes the emotional association with specific words and sentences, and therefore decreases the performance of our model. Using a framework like `Evidently` would allow us to monitor data drifting, target drifting and model performance over time. It would also allow us to monitor and capture use cases that our model cannot handle, such as when the model is applied to a context it was not trained on.
+
+GCP Cloud Run has internal system monitoring set up for the deployed app. This includes metrics like request count per minute and request latencies, which are important for monitoring the running cost of our application and latencies experienced by our users. To make this monitoring effective, we would need to implement targets for how well we wish our application to perform (service level objectives, SLOs) and alert systems to alert us when the application is not performing as it should.
 
 ### Question 24
 
