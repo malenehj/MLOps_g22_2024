@@ -331,6 +331,7 @@ In our methodology, configuration files are key. For every experiment conducted,
 > **service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. You can take**
 > **inspiration from [this figure](figures/wandb.png). Explain what metrics you are tracking and why they are**
 > **important.**
+
 >
 > Answer length: 200-300 words + 1 to 3 screenshots.
 >
@@ -340,7 +341,7 @@ In our methodology, configuration files are key. For every experiment conducted,
 >
 > Answer:
 
---- question 14 fill here ---
+Our project aimed for multiclass text classification, we monitored a variety of metrics to optimize model performance and resource utilization. We focused on tracking  learning rate and loss for training and accuracy and loss in evaluation. The training loss, is crucial as it quantifies the difference between the predicted and actual class labels, guiding the optimization process towards higher accuracy.Additionaly we tracked some system metrics to better understand the hardware performance throughout our experiments. Those metrics include disk space utilization, memory consuption etc all of them are key for our operational efficiency. Such metric directly relate to the cost of the resources and the overall budget of our project, allowing us to ensure cost-effectivenes of our project lifecycle.
 
 ### Question 15
 
