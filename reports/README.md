@@ -500,7 +500,7 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 >
 > Answer:
 
-Group member 1 used $3.37, group member 2 used $2.62 . In total, $5.99 credits were spent during development. The service costing most was cloud storage. If we had had more success with training our model on a VM Instance using the Compute Engine, this would likely have been more expensive.
+Group member 1 used $3.37, group member 2 used $2.62, grupe member 4 used 50. In total, $55.99 credits were spent during development. The service costing most was cloud storage. If we had had more success with training our model on a VM Instance using the Compute Engine, this would likely have been more expensive.
 
 ## Overall discussion of project
 
@@ -575,6 +575,8 @@ Student s232532 (Eszter) was in charge of processing and handling the data, sett
 
 Student s213792(Jakub) participated in setting up the model and handling the Transformers framework alongside training the initial model. Was also in charge of handling loggig with wandb and cofiguration management with Hydra. 
 
-Student s230085 (Riccardo) Worked on Unit testing, some of the classe, fought with integrating the unit testing and Hydra config files, tried to setup cookie cutter, and looked into a way to call the model using command line tools in a user friendly way (no success)
+Student s230085 (Riccardo) Worked on Unit testing, some of the classe, fought with integrating the unit testing and Hydra config files, tried to setup cookie cutter, and looked into a way to call the model using command line tools in a user friendly way (no success).
+
+Student s173973 (Mathias) worked on unit testing, coverage reports, continuous integration (CI) on GitHub, additions to make_dataset.py, and general bug fixing in this file and train_model.py. Additionally, conducted testing on virtual machines (VMs) on Google Cloud Platform (GCP) and participated in model training.
 
 All members contributed to the code by assisting each other in debugging, and all members contributed to writing the report. 
