@@ -497,7 +497,7 @@ GCP Cloud Run has internal system monitoring set up for the deployed app. This i
 >
 > Answer:
 
-Group member 1 used $3.37, group member 2 used ... . In total, ... credits were spent during development. The service costing most was cloud storage. If we had had more success with training our model on a VM Instance using the Compute Engine, this would likely have been more expensive. 
+Group member 1 used $3.37, group member 2 used $2.62 . In total, $5.99 credits were spent during development. The service costing most was cloud storage. If we had had more success with training our model on a VM Instance using the Compute Engine, this would likely have been more expensive.
 
 ## Overall discussion of project
 
@@ -565,5 +565,7 @@ Our project encountered challenges with Python file visibility and import issues
 > Answer:
 
 Student s237246 (Malene) was in charge of setting up the initial training and prediction code, the initial version of the FastAPI app, writing the initial dockerfile to be used in deployment, and final deployment of the model using Cloud Run. 
+
+Student s232532 (Eszter) was in charge of processing and handling the data, setting up DVC for our data, building docker files, (trying to) build docker images on a VM Instance, training our model with various attributes and setting up a GVC bucket for it.
 
 All members contributed to the code by assisting each other in debugging, and all members contributed to writing the report. 
