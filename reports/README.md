@@ -551,6 +551,8 @@ Our project encountered challenges with Python file visibility and import issues
 1. Refactoring Directory Structure: We reorganised our directories to align with Python's module hierarchy, improving file access and reducing import errors.
 2. Utilizing Absolute Imports and Adjusting sys.path: We switched to absolute imports for clearer module referencing and dynamically modified sys.path in scripts, ensuring proper module and file detection.
 
+Finally, with more time, we would have liked to ensure continuous deployment. As is, the final deployed docker image was locally built. Ensuring continuous deployment would have required that we had had time to find a way to continuously save trained models in a Cloud Bucket, integrated this into the docker images being built by Cloud Build, and finally deployed the latest (or, preferably, best performing) automatically built docker images with Cloud Run.
+
 
 ### Question 27
 
