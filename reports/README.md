@@ -570,4 +570,6 @@ Student s232532 (Eszter) was in charge of processing and handling the data, sett
 
 Student s213792(Jakub) participated in setting up the model and handling the Transformers framework alongside training the initial model. Was also in charge of handling loggig with wandb and cofiguration management with Hydra. 
 
+student s230085 (Ricardo) Worked on Unit testing, some of the classe, fought with integrating the unit testing and Hydra config files, tried to setup cookie cutter, and looked into a way to call the model using command line tools in a user friendly way ( no success)
+
 All members contributed to the code by assisting each other in debugging, and all members contributed to writing the report. 
