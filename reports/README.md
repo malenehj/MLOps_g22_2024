@@ -568,4 +568,6 @@ Student s237246 (Malene) was in charge of setting up the initial training and pr
 
 Student s232532 (Eszter) was in charge of processing and handling the data, setting up DVC for our data, building docker files, (trying to) build docker images on a VM Instance, training our model with various attributes and setting up a GVC bucket for it.
 
+Student s213792(Jakub) participated in setting up the model and handling the Transformers framework alongside training the initial model. Was also in charge of handling loggig with wandb and cofiguration management with Hydra. 
+
 All members contributed to the code by assisting each other in debugging, and all members contributed to writing the report. 
