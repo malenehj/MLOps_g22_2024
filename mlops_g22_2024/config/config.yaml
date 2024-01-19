@@ -1,5 +1,8 @@
-lr: 2e-5
-train_batch_size: 16
-eval_batch_size: 16
-epochs: 2
-weight_decay: 0.01
+defaults:
+   # - model: model_config.yaml
+    - train: train_config.yaml
+    - exp1: exp1_config.yaml
+    
+hydra:
+  run:
+    dir: .
